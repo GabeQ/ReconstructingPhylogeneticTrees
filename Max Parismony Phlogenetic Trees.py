@@ -38,28 +38,16 @@ def bestSinglePosition(tree, character, position, tipMapping, memo):
 
 			miniL = float("inf")
 			for leftChar in ["A", "T", "C", "G"]:
-				ansL = different(leftChar, character) + bestSinglePosition(leftTree, leftChar, position, tipMapping, memo)
+				ansL = bestSinglePosition(leftTree, leftChar, position, tipMapping, memo) + different(leftChar, character)
 				if ansL < miniL:
 					miniL = ansL
-		#	memo[leftTree] = miniL
+			memo[leftTree[0]] = miniL
 
 			miniR = float("inf")
 			for rightChar in ["A", "T", "C", "G"]:
-				ansR = different(rightChar, character) + bestSinglePosition(rightTree, rightChar, position, tipMapping, memo)
+				ansR = bestSinglePosition(rightTree, rightChar, position, tipMapping, memo) + different(rightChar, character)
 				if ansR < miniR:
-					miniR = ansR
+					miniR = ansR 
+			memo[rightTree[0]] = miniR
 
-			memo[rightTree] = miniR
-
-		#	memo[tree] = (miniR + miniL)
 			return miniR + miniL
-
-
-
-
-
-
-
-
-
-
