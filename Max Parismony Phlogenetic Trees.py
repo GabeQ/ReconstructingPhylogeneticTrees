@@ -1,11 +1,11 @@
-Max Parismony Phlogenetic Trees
+#Max Parismony Phlogenetic Trees
 
 
 def isLeaf(tree):
-	if tree[1] and tree[2] == ():
-		return true
+	if tree[1] == () and tree[2] == ():
+		return True
 	else:
-		return false
+		return False
 
 
 def different(char, char1):
@@ -18,35 +18,41 @@ def different(char, char1):
 
 
 def bestSinglePosition(tree, character, position, tipMapping, memo):
-	"""
-	memo is a dictionary that will be used to support memoization
+	"""memo is a dictionary that will be used for memoization"""
 
-	"""
-	if isLeaf(tree) == true:
-		char1 = tipMapping[tree[0]][position] # this would find the leaf in the dictionary, and the return the letter of the sequence of that leaf at the given position.
-		num1 = different(character, char1)
-		if num1 == 1:
-			num = float(inf)
-		return num
+	if tree in memo:
+		return memo[tree]
 
-	else:
-		root = tree[0]
-		leftTree = tree[1]
-		rightTree = tree[2]
+	else: 
+		if isLeaf(tree) == True:
+			char1 = tipMapping[tree[0]][position] # this would find the leaf in the dictionary, and the return the letter of the sequence of that leaf at the given position.
+			num1 = different(character, char1)
+			if num1 == 1:
+				num1 = float("inf")
+			return num1
 
-		miniL = float(inf)
-		for leftChar in ["A", "T", "C", "G"]:
-			ansL = different(leftChar, character) + bestSinglePosition(leftTree, leftChar, position, tipMapping, memo)
-			if ansL < miniL:
-				miniL = ansL
+		else:
+			root = tree[0]
+			leftTree = tree[1]
+			rightTree = tree[2]
 
-		miniR = float(inf)
-		for rightChar in ["A", "T", "C", "G"]:
-			ansR = different(rightChar, character) + bestSinglePosition(rightTree, rightChar, position, tipMapping, memo)
-			if ansR < miniR:
-				miniR = ansR
+			miniL = float("inf")
+			for leftChar in ["A", "T", "C", "G"]:
+				ansL = different(leftChar, character) + bestSinglePosition(leftTree, leftChar, position, tipMapping, memo)
+				if ansL < miniL:
+					miniL = ansL
+		#	memo[leftTree] = miniL
 
-		return miniR + miniL
+			miniR = float("inf")
+			for rightChar in ["A", "T", "C", "G"]:
+				ansR = different(rightChar, character) + bestSinglePosition(rightTree, rightChar, position, tipMapping, memo)
+				if ansR < miniR:
+					miniR = ansR
+
+			memo[rightTree] = miniR
+
+		#	memo[tree] = (miniR + miniL)
+			return miniR + miniL
 
 
 
