@@ -1,6 +1,5 @@
 #Max Parismony Phlogenetic Trees
 
-
 def isLeaf(tree):
 	""" is the tree a leaf, returns true or false"""
 	if tree[1] == () and tree[2] == ():
@@ -16,7 +15,7 @@ def different(char, char1):
 		return 1
 
 def bestSinglePosition(tree, character, position, tipMapping, memo):
-	"""Returns the minimum parsimony score for a given position at a given nucleotide"""
+	"""Returns the minimum parsimony score for a given position at a given nucleotide position"""
 	if tree in memo:
 		return memo[tree]
 	else: 
@@ -57,6 +56,51 @@ def maxParsimony(tree, tipMapping):
 				minNum = num1
 		ans += minNum
 	return ans
+
+def RLRtoNewick(tree):
+	""" converts from Root,Left,Right format trees to Newick format trees """
+	if isLeaf(tree) == True:
+		return tree[0]
+	else:
+		return (RLRtoNewick(tree[1]), RLRtoNewick(tree[2]))
+
+def allNNIs(tree):
+	""" "takes a root-left-right tree as input, 
+	finds all of the re-rootings of this tree, 
+	and then returns a list of all of the NNI trees for those re-rootings in root-left-right format" """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
