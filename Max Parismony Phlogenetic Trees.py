@@ -1,14 +1,14 @@
 #Max Parismony Phlogenetic Trees
 
 def isLeaf(tree):
-	""" is the tree a leaf, returns true or false"""
+	"""is the tree a leaf, returns true or false"""
 	if tree[1] == () and tree[2] == ():
 		return True
 	else:
 		return False
 
 def different(char, char1):
-	""" determines if we need to add a 1 or a 0 to the score of a letter """
+	"""determines if we need to add a 1 or a 0 to the score of a letter """
 	if char == char1:
 		return 0
 	else:
@@ -44,7 +44,7 @@ def bestSinglePosition(tree, character, position, tipMapping, memo):
 			return miniR + miniL
 
 def maxParsimony(tree, tipMapping):
-	""" computes the best score for all positions in a sequence and for all possible characters"""
+	"""computes the best score for all positions in a sequence and for all possible characters"""
 	list1 = tipMapping.keys()
 	length = len(tipMapping[list1[0]])
 	ans = 0
@@ -57,17 +57,65 @@ def maxParsimony(tree, tipMapping):
 		ans += minNum
 	return ans
 
+
 def RLRtoNewick(tree):
-	""" converts from Root,Left,Right format trees to Newick format trees """
+	"""converts from Root,Left,Right format trees to Newick format trees """
 	if isLeaf(tree) == True:
 		return tree[0]
 	else:
 		return (RLRtoNewick(tree[1]), RLRtoNewick(tree[2]))
 
+
+def NewicktoRLR(tree):
+	"""converts from Newick format to RLR"""
+	if type(tree[0]) != tuple and type(tree[1]) != tuple:
+		return ('Anc', (tree[0], (), ()), (tree[1], (), ()))
+	elif type(tree[0]) != tuple:
+		return ('Anc', (tree[0], (), ()), NewicktoRLR(tree[1]))
+	elif type(tree[1]) != tuple:
+		return ('Anc', NewicktoRLR(tree[0]), (tree[1], (), ()))
+	else:
+		return ('Anc', NewicktoRLR(tree[0]), NewicktoRLR(tree[1]))
+
+def goLeft(tree):
+	"""goes left yo"""
+	LL = tree[0][0]
+	LR = tree[0][1]
+	R = tree[1]
+	if type(LL) != tuple and type(LR) != tuple:
+		return []
+	elif type(LL) != tuple:
+		return [(LR, (LL, R))] + goLeft((LR, (LL, R)))
+	elif type(LR) != tuple:
+		return [(LL, (LR, R))] + goLeft((LL, (LR, R)))
+	else:
+		return [(LL, (LR, R))] + goLeft((LL, (LR, R))) + [(LR, (LL, R))] + goLeft((LR, (LL, R)))
+
+def goRight(tree):
+	"""goes right"""
+	RL = tree[1][0]
+	RR = tree[1][1]
+	L = tree[0]
+	if type(RL) != tuple and type(RR) != tuple:
+		return []
+	elif type(RL) != tuple:
+		return [((L, RL), RR)] + goRight(((L, RL), RR))
+	elif type(RR) != tuple:
+		return [((L, RR), RL)] + goRight(((L, RR), RL))
+	else:
+		return [((L, RR), RL)] + goRight(((L, RR), RL)) + [((L, RL), RR)] + goRight(((L, RL), RR))
+		
+
 def allNNIs(tree):
 	""" "takes a root-left-right tree as input, 
 	finds all of the re-rootings of this tree, 
 	and then returns a list of all of the NNI trees for those re-rootings in root-left-right format" """
+
+
+
+
+
+
 
 
 
