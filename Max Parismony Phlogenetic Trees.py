@@ -1,5 +1,7 @@
 #Max Parismony Phlogenetic Trees
 
+import random
+
 def isLeaf(tree):
 	"""is the tree a leaf, returns true or false"""
 	if tree[1] == () and tree[2] == ():
@@ -57,14 +59,12 @@ def maxParsimony(tree, tipMapping):
 		ans += minNum
 	return ans
 
-
 def RLRtoNewick(tree):
 	"""converts from Root,Left,Right format trees to Newick format trees """
 	if isLeaf(tree) == True:
 		return tree[0]
 	else:
 		return (RLRtoNewick(tree[1]), RLRtoNewick(tree[2]))
-
 
 def NewicktoRLR(tree):
 	"""converts from Newick format to RLR"""
@@ -78,7 +78,7 @@ def NewicktoRLR(tree):
 		return ('Anc', NewicktoRLR(tree[0]), NewicktoRLR(tree[1]))
 
 def goLeft(tree):
-	"""goes left yo"""
+	"""goes to the left side of the given tree to find all possible rerooted trees"""
 	LL = tree[0][0]
 	LR = tree[0][1]
 	R = tree[1]
@@ -92,7 +92,7 @@ def goLeft(tree):
 		return [(LL, (LR, R))] + goLeft((LL, (LR, R))) + [(LR, (LL, R))] + goLeft((LR, (LL, R)))
 
 def goRight(tree):
-	"""goes right"""
+	"""goes to the right side of the given tree to find all possible rerooted trees"""
 	RL = tree[1][0]
 	RR = tree[1][1]
 	L = tree[0]
@@ -103,17 +103,59 @@ def goRight(tree):
 	elif type(RR) != tuple:
 		return [((L, RR), RL)] + goRight(((L, RR), RL))
 	else:
-		return [((L, RR), RL)] + goRight(((L, RR), RL)) + [((L, RL), RR)] + goRight(((L, RL), RR))
+		return [((L, RL), RR)] + goRight(((L, RL), RR)) + [((L, RR), RL)] + goRight(((L, RR), RL))
 
 def go(tree):
-	""" """
+	"""outputs a list of all the rerooted trees using goLeft and goRight"""
 	return goLeft(tree) + goRight(tree)
-		
 
 def allNNIs(tree):
-	""" "takes a root-left-right tree as input, 
-	finds all of the re-rootings of this tree, 
+	""" "takes a root-left-right tree as input, finds all of the re-rootings of this tree, 
 	and then returns a list of all of the NNI trees for those re-rootings in root-left-right format" """
+	tree1 = RLRtoNewick(tree) #convert tree to Newick format
+	reRooted = go(tree1)
+	NNIs = []
+	for tree in reRooted:
+		LL = tree[0][0]
+		LR = tree[0][1]
+		RL = tree[1][0]
+		RR = tree[1][1]
+		NNIs.append(NewicktoRLR(((LL, RL), (LR, RR))))
+		NNIs.append(NewicktoRLR(((LL, RR), (RL, LR))))
+	return NNIs
+
+def makeTree(tips):
+	if len(tips) < 2:
+		return "invaid dictionary"
+	elif len(tips)==2:
+		return ("Anc", (tips[0], (), ()), (tips[1], (), ()))
+	else:
+		return ("Anc", (tips[0], (), ()), makeTree(tips[1:]))
+
+def NNIheuristic(tipMapping, sampleSize):
+	""""Find the maximum parsimony score for that tree" """
+	tips = tipMapping.keys()
+	tree = makeTree(tips)
+	score = maxParsimony(tree, tipMapping)
+	while True:
+		NNIs = allNNIs(tree)
+		if len(NNIs)-1 < sampleSize:
+			sampleSize = len(NNIs)-1
+		toScore = random.sample(NNIs, sampleSize)
+		count = 0
+		for sample in toScore:
+			newScore = maxParsimony(sample, tipMapping)
+			if newScore < score:
+				score = newScore
+				tree = sample
+			else:
+				count += 1
+			if count == sampleSize:
+				break
+	outputTree = RLRtoNewick(tree)
+	return score + outputTree
+
+
 
 
 
