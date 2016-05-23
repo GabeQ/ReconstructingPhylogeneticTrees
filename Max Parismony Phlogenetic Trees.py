@@ -137,6 +137,7 @@ def NNIheuristic(tipMapping, sampleSize):
 	tips = tipMapping.keys()
 	tree = makeTree(tips)
 	score = maxParsimony(tree, tipMapping)
+	iteration = 0
 	while True:
 		NNIs = allNNIs(tree)
 		if len(NNIs)-1 < sampleSize:
@@ -151,29 +152,13 @@ def NNIheuristic(tipMapping, sampleSize):
 			else:
 				count += 1
 			if count == sampleSize:
+				iteration += 1
 				break
+		if iteration > 2:
+			break
 	outputTree = RLRtoNewick(tree)
-	return score + outputTree
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	print score
+	return outputTree
 
 
 
