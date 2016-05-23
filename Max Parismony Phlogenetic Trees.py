@@ -104,6 +104,10 @@ def goRight(tree):
 		return [((L, RR), RL)] + goRight(((L, RR), RL))
 	else:
 		return [((L, RR), RL)] + goRight(((L, RR), RL)) + [((L, RL), RR)] + goRight(((L, RL), RR))
+
+def go(tree):
+	""" """
+	return goLeft(tree) + goRight(tree)
 		
 
 def allNNIs(tree):
