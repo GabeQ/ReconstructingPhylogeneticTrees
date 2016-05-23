@@ -112,7 +112,7 @@ def go(tree):
 def allNNIs(tree):
 	""" "takes a root-left-right tree as input, finds all of the re-rootings of this tree, 
 	and then returns a list of all of the NNI trees for those re-rootings in root-left-right format" """
-	tree1 = RLRtoNewick(tree) #convert tree to Newick format
+	tree1 = RLRtoNewick(tree)
 	reRooted = go(tree1)
 	NNIs = []
 	for tree in reRooted:
