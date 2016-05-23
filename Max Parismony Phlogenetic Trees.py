@@ -157,8 +157,7 @@ def NNIheuristic(tipMapping, sampleSize):
 		if iteration > 2:
 			break
 	outputTree = RLRtoNewick(tree)
-	print score
-	return outputTree
+	return score + outputTree
 
 
 
