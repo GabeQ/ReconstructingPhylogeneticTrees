@@ -125,6 +125,7 @@ def allNNIs(tree):
 	return NNIs
 
 def makeTree(tips):
+	'''constructs a basic tree given a list of the leafts'''
 	if len(tips) < 2:
 		return "invaid dictionary"
 	elif len(tips)==2:
@@ -133,7 +134,7 @@ def makeTree(tips):
 		return ("Anc", (tips[0], (), ()), makeTree(tips[1:]))
 
 def NNIheuristic(tipMapping, sampleSize):
-	""""Find the maximum parsimony score for that tree" """
+	""""Find the maximum parsimony score for that tree"""
 	tips = tipMapping.keys()
 	tree = makeTree(tips)
 	score = maxParsimony(tree, tipMapping)
