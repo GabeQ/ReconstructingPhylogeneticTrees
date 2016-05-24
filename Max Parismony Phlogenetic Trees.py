@@ -140,9 +140,11 @@ def NNIheuristic(FASTAFile, sampleSize):
 	""""Find the maximum parsimony score for that tree"""
         myAlignment = AlignIO.read(FASTAFile, "fasta") #FASTAFile must be in string format
         print myAlignment
-        tipMapping = myAlignment #find way to convert myAlignment to a dictionary of the tipMappings
+        tipMapping = {}
+        for record in myAlignment:
+            tipMapping[record.id] = str(record.seq)
         calculator = DistanceCalculator("identity") 
-        myMatrix  = calculator.get_distance(myAlignment)
+        myMatrix = calculator.get_distance(myAlignment)
         print myMatrix
         constructor = DistanceTreeConstructor()
         myTree = constructor.nj(myMatrix)
@@ -163,27 +165,3 @@ def NNIheuristic(FASTAFile, sampleSize):
 	outputTree = RLRtoNewick(tree)
 	print score
 	return outputTree
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
