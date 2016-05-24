@@ -128,7 +128,7 @@ def allNNIs(tree):
 	return NNIs
 
 def makeTree(tips):
-	'''constructs a basic tree given a list of the leafts'''
+	'''constructs a basic tree given a list of the leafs'''
 	if len(tips) < 2:
 		return "invaid dictionary"
 	elif len(tips)==2:
