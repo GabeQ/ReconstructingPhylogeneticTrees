@@ -18,8 +18,8 @@ def different(char, char1):
 
 def bestSinglePosition(tree, character, position, tipMapping, memo):
 	"""Returns the minimum parsimony score for a given position at a given nucleotide position"""
-	if tree in memo:
-		return memo[tree]
+	if (tree, character) in memo:
+		return memo[(tree, character)]
 	else: 
 		if isLeaf(tree) == True:
 			char1 = tipMapping[tree[0]][position] # this would find the leaf in the dictionary, and the return the letter of the sequence of that leaf at the given position.
@@ -36,14 +36,14 @@ def bestSinglePosition(tree, character, position, tipMapping, memo):
 				ansL = bestSinglePosition(leftTree, leftChar, position, tipMapping, memo) + different(leftChar, character)
 				if ansL < miniL:
 					miniL = ansL
-			memo[leftTree[0]] = miniL
 			miniR = float("inf")
 			for rightChar in ["A", "T", "C", "G"]:
 				ansR = bestSinglePosition(rightTree, rightChar, position, tipMapping, memo) + different(rightChar, character)
 				if ansR < miniR:
 					miniR = ansR 
-			memo[rightTree[0]] = miniR
-			return miniR + miniL
+			ans = miniR + miniL
+			memo[(tree, character)] = ans
+			return ans
 
 def maxParsimony(tree, tipMapping):
 	"""computes the best score for all positions in a sequence and for all possible characters"""
