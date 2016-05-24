@@ -4,6 +4,7 @@ from Bio import AlignIO
 from Bio.Phylo.TreeConstruction import DistanceCalculator
 from Bio.Phylo.TreeConstruction import DistanceTreeConstructor
 import random
+import cStringIO
 
 def isLeaf(tree):
 	"""is the tree a leaf, returns true or false"""
@@ -148,6 +149,8 @@ def NNIheuristic(FASTAFile, sampleSize):
         print myMatrix
         constructor = DistanceTreeConstructor()
         myTree = constructor.nj(myMatrix)
+        buf = cStringIO.StringIO()
+        Phylo.write(myTree, buf, 'newick')
         tree = myTree #myTree must be converted from Clade format to Newick Format
 	score = maxParsimony(tree, tipMapping)
 	while True:
