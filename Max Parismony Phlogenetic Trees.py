@@ -3,7 +3,7 @@ from Bio import Phylo
 from Bio import AlignIO
 from Bio.Phylo.TreeConstruction import DistanceCalculator
 from Bio.Phylo.TreeConstruction import DistanceTreeConstructor
-from string import digits
+from ast import literal_eval
 import re
 import random
 import cStringIO
@@ -151,14 +151,16 @@ def NNIheuristic(FASTAFile, sampleSize):
         print myMatrix
         constructor = DistanceTreeConstructor()
         myTree = constructor.nj(myMatrix)
+        for clade in myTree.get_terminals():
+            clade.name = "\"" + clade.name + "\""
         buf = cStringIO.StringIO()
         Phylo.write(myTree, buf, 'newick', plain = True)
         tree = buf.getvalue()
         tree = re.sub(r'Inner\d*', '', tree)
         tree = tree.replace(";", "")
+        tree = literal_eval(tree)
         print tree
         tree = NewicktoRLR(tree)
-        print tree
 	score = maxParsimony(tree, tipMapping)
 	print score
 	while True:
