@@ -136,10 +136,17 @@ def makeTree(tips):
 	else:
 		return ("Anc", (tips[0], (), ()), makeTree(tips[1:]))
 
-def NNIheuristic(tipMapping, sampleSize):
+def NNIheuristic(FASTAFile, sampleSize):
 	""""Find the maximum parsimony score for that tree"""
-	tips = tipMapping.keys()
-	tree = makeTree(tips)
+        myAlignment = AlignIO.read(FASTAFile, "fasta") #FASTAFile must be in string format
+        print myAlignment
+        tipMapping = myAlignment #find way to convert myAlignment to a dictionary of the tipMappings
+        calculator = DistanceCalculator("identity") 
+        myMatrix  = calculator.get_distance(myAlignment)
+        print myMatrix
+        constructor = DistanceTreeConstructor()
+        myTree = constructor.nj(myMatrix)
+        tree = myTree #myTree must be converted from Clade format to Newick Format
 	score = maxParsimony(tree, tipMapping)
 	while True:
 		NNIs = allNNIs(tree)
