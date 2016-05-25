@@ -28,7 +28,7 @@ def bestSinglePosition(tree, character, position, tipMapping, memo):
         return memo[(tree, character)]
     else:
         if isLeaf(tree) == True:
-            currentChar = tipMapping[tree[0]][position] # this would find the leaf in the dictionary, and the return the letter of the sequence of that leaf at the given position.
+            currentChar = tipMapping[tree[0]][position]
             if isDifferent(character, currentChar) == 1:
                 return float("inf")
             else:
@@ -168,10 +168,9 @@ def NNIheuristic(FASTAFile, sampleSize):
     tree = re.sub(r'Inner\d*', '', tree)
     tree = tree.replace(";", "")
     tree = literal_eval(tree)
-    
+
     # RLR tree required for maxParsimony function
     tree = NewicktoRLR(tree)
-    print tree
     score = maxParsimony(tree, tipMapping)
     print score
     
@@ -186,12 +185,14 @@ def NNIheuristic(FASTAFile, sampleSize):
         if sortedlist[0][0] < score:
             score = sortedlist[0][0]
             tree = sortedlist[0][1]
+	sortedlist = sorted(scoredList)
+	if sortedlist[0][0] < score:
+	       score = sortedlist[0][0]
+	       tree = sortedlist[0][1]
         else:
-            break
-            
+            break            
     outputTree = RLRtoNewick(tree)
     print score
-    #Phylo.draw(outputTree)
     return outputTree
 
 	
