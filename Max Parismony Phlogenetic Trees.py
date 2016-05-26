@@ -7,6 +7,8 @@ from ast import literal_eval
 import re
 import random
 import cStringIO
+import networkx as nx
+import pylab
 
 def isLeaf(tree):
     """is the tree a leaf, returns true or false"""
@@ -138,6 +140,47 @@ def makeTree(tips):
     else:
         return ("Anc", (tips[0], (), ()), makeTree(tips[1:]))
 
+def getGeneGroups(leaves):
+    leaves = sorted(leaves)
+    groups = []
+    while leaves != []:
+        firstLeaf = leaves.pop(0)
+        group = [firstLeaf]
+        toRemove = []
+        for leaf in leaves:
+            if firstLeaf in leaf:
+                group.append(leaf)
+                toRemove.append(leaf)
+        for leaf in toRemove:
+            leaves.remove(leaf)
+        groups.append(group)
+    return groups
+        
+                                       
+def isFeasible(graph, leaves):
+    geneGroups = getGeneGroups(leaves)
+    groupPaths = []
+    notFeasable = []
+    feasable = True
+    for group in geneGroups:
+        groupName = group[0]
+        pathNodes = set()
+        for leaf in group[1:]:
+            pathNodes = pathNodes.union(set(nx.shortest_path(graph, group[0], leaf, None)))
+        groupPaths.append((groupName, pathNodes))
+    for i in range(len(groupPaths)):
+        geneName = groupPaths[i][0][:groupPaths[i][0].find('_')]
+        for j in range(i+1, len(groupPaths)):
+            if groupPaths[j][0].startswith(geneName + '_'):
+                if groupPaths[i][1].intersection(groupPaths[j][1]) != set([]):
+                    feasable = False
+                    notFeasable.append((groupPaths[i][0], groupPaths[j][0]))
+    return feasable
+                
+        
+        
+    
+
 def NNIheuristic(FASTAFile, sampleSize):
     """"Find the maximum parsimony score for that tree"""
     # Import fasta alignment file
@@ -167,10 +210,11 @@ def NNIheuristic(FASTAFile, sampleSize):
     tree = buf.getvalue()
     tree = re.sub(r'Inner\d*', '', tree)
     tree = tree.replace(";", "")
-    tree = literal_eval(tree)
+    tree = literal_eval(tree)    
 
     # RLR tree required for maxParsimony function
     tree = NewicktoRLR(tree)
+    
     score = maxParsimony(tree, tipMapping)
     print score
     
@@ -196,7 +240,8 @@ def NNIheuristic(FASTAFile, sampleSize):
     return outputTree
 
 	
-
+testList1 = ["a_1", "a_1_1", "a_2", "a_2_1", "b_1", "b_1_1"]
+testList2 = ["a_1", "a_1_1", "b_2", "b_2_1", "b_1", "b_1_1"]
 
 
 
