@@ -199,9 +199,13 @@ def NNIheuristic(FASTAFile, sampleSize):
             sampleSize = len(NNIs)-1
         toScore = random.sample(NNIs, sampleSize)
         # add feasibility test
+        feasible = []
+        for x in toScore:
+            testTree = RLRtoPhyloxmlConverter(x)
+            if isFeasible(testTree) == true:
+                feasible.append(testTree)
         
-        
-        scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), toScore)
+        scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), feasible)
         sortedlist = sorted(scoredList)
         if sortedlist[0][0] < score:
             score = sortedlist[0][0]
