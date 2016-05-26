@@ -180,6 +180,8 @@ def NNIheuristic(FASTAFile, sampleSize):
         if len(NNIs)-1 < sampleSize:
             sampleSize = len(NNIs)-1
         toScore = random.sample(NNIs, sampleSize)
+        # add feasibility test
+        
         scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), toScore)
         sortedlist = sorted(scoredList)
         if sortedlist[0][0] < score:
