@@ -7,6 +7,10 @@ from ast import literal_eval
 import re
 import random
 import cStringIO
+import networkx
+import pylab
+import os
+import tempfile
 
 def isLeaf(tree):
     """is the tree a leaf, returns true or false"""
@@ -137,12 +141,27 @@ def makeTree(tips):
         return ("Anc", (tips[0], (), ()), (tips[1], (), ()))
     else:
         return ("Anc", (tips[0], (), ()), makeTree(tips[1:]))
+        
+        
+def RLRtoPhyloxmlConverter(tree):
+    """ converts from RLR format to Phyloxml"""
+    tree = RLRtoNewick(tree)
+    fp = tempfile.TemporaryFile()
+    fp.write(str(tree))
+    fp.write(b";")
+    buf2 = cStringIO.StringIO()
+    fp.seek(0)
+    Phylo.convert(fp, 'newick', buf2, 'phyloxml')
+    tree = buf2.getvalue()
+  #  if type(tree) == str:
+  #      print True
+  #  print "HERE is tree:", tree
+    return tree
 
 def NNIheuristic(FASTAFile, sampleSize):
     """"Find the maximum parsimony score for that tree"""
     # Import fasta alignment file
     myAlignment = AlignIO.read(FASTAFile, "fasta")
-    print myAlignment
     
     # Create a tip mapping from the fasta file
     tipMapping = {}
@@ -152,7 +171,6 @@ def NNIheuristic(FASTAFile, sampleSize):
     # Compute a distance matrix and construct tree
     calculator = DistanceCalculator("identity") 
     myMatrix = calculator.get_distance(myAlignment)
-    print myMatrix
     constructor = DistanceTreeConstructor()
     upgmaTree = constructor.upgma(myMatrix)
     Phylo.draw(upgmaTree)
@@ -182,6 +200,7 @@ def NNIheuristic(FASTAFile, sampleSize):
         toScore = random.sample(NNIs, sampleSize)
         # add feasibility test
         
+        
         scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), toScore)
         sortedlist = sorted(scoredList)
         if sortedlist[0][0] < score:
@@ -196,28 +215,9 @@ def NNIheuristic(FASTAFile, sampleSize):
     outputTree = RLRtoNewick(tree)
     print score
     return outputTree
+    
 
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
