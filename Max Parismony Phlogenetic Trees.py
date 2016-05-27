@@ -282,6 +282,9 @@ def NNIheuristic(FASTAFile, sampleSize):
             else: #do we need this? 
                 print "false"
         print feasible
+        if len(feasible) == 0:
+            print "No feasible trees found"
+            break
         scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), feasible)
         sortedlist = sorted(scoredList)
         if sortedlist[0][0] < score:
@@ -300,7 +303,7 @@ testList2 = ["a_1", "a_1_1", "b_2", "b_2_1", "b_1", "b_1_1"]
 
 
 """
-1. test if the original tree is feasible, if it is, set the score it it's score
+1. test if the original tree is feasible, if it is, set the score to it's score
 2. if the original test is not, set score to equal float("inf")
 3. test the neighbors for feasibility, only score those that are feasible
 4. if you find a tree that is feasible and has a better score than the current saved score, save the new lower score and tree associated
