@@ -146,17 +146,23 @@ def makeTree(tips):
         
 def RLRtoPhyloxmlConverter(tree):
     """ converts from RLR format to Phyloxml"""
-    tree = RLRtoNewick(tree)
-    fp = tempfile.TemporaryFile()
-    fp.write(str(tree))
-    fp.write(b";")
+    # tree = RLRtoNewick(tree)
+    fp1 = tempfile.TemporaryFile()
+    fp2 = tempfile.TemporaryFile()
+    # print str(tree)
+    fp1.write(str(tree))
+    fp1.write(b";")
     buf2 = cStringIO.StringIO()
-    fp.seek(0)
-    Phylo.convert(fp, 'newick', buf2, 'phyloxml')
-    tree = buf2.getvalue()
-  #  if type(tree) == str:
-  #      print True
-  #  print "HERE is tree:", tree
+    fp1.seek(0)
+    Phylo.convert(fp1, 'newick', fp2, 'phyloxml')
+    # tree = Phylo.read('testingConversions.py', 'phyloxml')
+    fp2.seek(0)
+    tree = fp2.read()
+    print "TYPEEEEE", type(tree)
+    # tree = buf2.getvalue()
+    # if type(tree) == str:
+        # print True
+    print "Here is tree:", tree
     return tree
 
 def getGeneGroups(leaves):
@@ -195,7 +201,8 @@ def isFeasible(graph, leaves):
                     feasable = False
                     notFeasable.append((groupPaths[i][0], groupPaths[j][0]))
     return feasable
-                
+          
+                #takes RLR tree        
 def makeGraph(graph, tree):
     if isLeaf(tree):
         return tree[0]
@@ -204,20 +211,13 @@ def makeGraph(graph, tree):
         graph.add_edge(uniqueId, makeGraph(graph, tree[1]))
         graph.add_edge(uniqueId, makeGraph(graph, tree[2]))
         return uniqueId
-        
+      
+      #takes RLR tree  
 def getLeaves(tree):
     if isLeaf(tree):
         return [tree[0]]
     else:
         return getLeaves(tree[1]) + getLeaves(tree[2])
-        
-def getEdges(tree):
-    if isLeaf(tree):
-        return []
-    elif isLeaf(tree[1]) and isLeaf(tree[2]):
-        return [(tree[0], tree[1][0]), (tree[0], tree[2][0])]
-    else:
-        return [(tree[0], tree[1][0]), (tree[0], tree[2][0])] + getEdges(tree[1]) + getEdges(tree[2])
 
 def NNIheuristic(FASTAFile, sampleSize):
     """"Find the maximum parsimony score for that tree"""
@@ -234,7 +234,8 @@ def NNIheuristic(FASTAFile, sampleSize):
     myMatrix = calculator.get_distance(myAlignment)
     constructor = DistanceTreeConstructor()
     upgmaTree = constructor.upgma(myMatrix)
-    Phylo.draw(upgmaTree)
+    
+  #  Phylo.draw(upgmaTree)
     
     # Convert phyloxml tree to newick
     # biopython does not provide a function to do this so it was necessary
@@ -246,12 +247,20 @@ def NNIheuristic(FASTAFile, sampleSize):
     tree = buf.getvalue()
     tree = re.sub(r'Inner\d*', '', tree)
     tree = tree.replace(";", "")
-    tree = literal_eval(tree)    
+    tree = literal_eval(tree)    #newick format
 
     # RLR tree required for maxParsimony function
-    tree = NewicktoRLR(tree)
+    tree = NewicktoRLR(tree) 
     
-    score = maxParsimony(tree, tipMapping)
+    graph1 = nx.Graph()
+    graphTree = makeGraph( graph1,tree)
+    treeLeaves = getLeaves(tree)
+    
+    if isFeasible(graphTree, treeLeaves) == True:
+        score = maxParsimony(tree, tipMapping)
+    else:
+        score = float("inf")
+    
     print tree
     print score
     
@@ -261,15 +270,16 @@ def NNIheuristic(FASTAFile, sampleSize):
         if len(NNIs)-1 < sampleSize:
             sampleSize = len(NNIs)-1
         toScore = random.sample(NNIs, sampleSize)
+        
         # add feasibility test
         feasible = []
         for tree in toScore:
             graph = nx.Graph()
-            makeGraph(graph, tree)
+            treeGraph = makeGraph(graph, tree)
             leaves = getLeaves(tree)
-            if isFeasible(graph, leaves) == True:
+            if isFeasible(treeGraph, leaves) == True:
                 feasible.append(tree)
-            else:
+            else: #do we need this? 
                 print "false"
         print feasible
         scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), feasible)
@@ -277,10 +287,6 @@ def NNIheuristic(FASTAFile, sampleSize):
         if sortedlist[0][0] < score:
             score = sortedlist[0][0]
             tree = sortedlist[0][1]
-	sortedlist = sorted(scoredList)
-	if sortedlist[0][0] < score:
-	       score = sortedlist[0][0]
-	       tree = sortedlist[0][1]
         else:
             break            
     outputTree = RLRtoNewick(tree)
@@ -291,8 +297,14 @@ def NNIheuristic(FASTAFile, sampleSize):
 	
 testList1 = ["a_1", "a_1_1", "a_2", "a_2_1", "b_1", "b_1_1"]
 testList2 = ["a_1", "a_1_1", "b_2", "b_2_1", "b_1", "b_1_1"]
-testTree = (1, ("a", (), ()), (2, ("b_1", (), ()), ("b_2", (), ())))
 
+
+"""
+1. test if the original tree is feasible, if it is, set the score it it's score
+2. if the original test is not, set score to equal float("inf")
+3. test the neighbors for feasibility, only score those that are feasible
+4. if you find a tree that is feasible and has a better score than the current saved score, save the new lower score and tree associated
+"""
 
 
 
