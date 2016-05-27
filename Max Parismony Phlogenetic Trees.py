@@ -228,7 +228,7 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
     # RLR tree required for maxParsimony function
     tree = NewicktoRLR(tree) 
     score = maxParsimony(tree, tipMapping)
-    print tree
+  #  print tree
     print "ORIGINAL SCORE", score
     
     # Perform NNI heuristic
@@ -255,7 +255,7 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
                 feasible.append(tree)
             else:
                 infeasible.append(tree) #if this NNI is not possible
-        if len(feasible) != 0: #if any possible NNIs we're found
+        if len(feasible) != 0: #if feasible NNIs were found
             #print feasible
             scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), feasible)
             sortedList = sorted(scoredList)
@@ -263,13 +263,14 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
             if not currentFeasible or sortedList[0][0] < score:
                 score = sortedList[0][0]
                 tree = sortedList[0][1]
+                print "current score:", score
             else: 
                 break  
         else: #if no possible NNIs we're found 
             if currentFeasible: #checks if the original tree was feasible
                 break
             counter += 1 
-            print counter
+            print "counter: ", counter
             if counter >= threshold:
                 return "no feasible tree found"
             scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), infeasible)
@@ -286,7 +287,7 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
                 tree = sortedList[-1][1]
     outputTree = RLRtoNewick(tree)
     print "THE REAL SCORE", score
-    print("--- %s seconds ---" % (time.time() - startTime))
+    print "time:", (" %s seconds " % (time.time()-startTime))
     return outputTree
     
 
