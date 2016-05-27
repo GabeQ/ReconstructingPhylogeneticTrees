@@ -245,6 +245,7 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
         makeGraph(graph, tree)
         leaves = getLeaves(tree)
         currentFeasible = isFeasible(graph,leaves)
+        print "currentFeasible: ", currentFeasible
         
         NNIs = allNNIs(tree)
         if len(NNIs)-1 < sampleSize:
@@ -260,10 +261,12 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
             leaves = getLeaves(tree)
             if isFeasible(graph, leaves): #if this NNI is possible
                 feasible.append(tree)
+                print "appened feasible NNI!"
             else:
                 infeasible.append(tree) #if this NNI is not possible
+                print "appened infeasible NNI"
         if len(feasible) != 0: #if feasible NNIs were found
-            #print feasible
+            print "found feasible NNIs, scoring them now"
             scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), feasible)
             sortedList = sorted(scoredList)
             counter = 0
@@ -273,7 +276,8 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
                 print "current score:", score
             else: 
                 break  
-        else: #if no possible NNIs we're found 
+        else: #if no feasible NNIs were found 
+            print "no feasible NNIs were found"
             if currentFeasible: #checks if the original tree was feasible
                 break
             counter += 1 
