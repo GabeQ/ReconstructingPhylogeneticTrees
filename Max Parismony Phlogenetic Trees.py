@@ -210,6 +210,14 @@ def getLeaves(tree):
         return [tree[0]]
     else:
         return getLeaves(tree[1]) + getLeaves(tree[2])
+        
+def getEdges(tree):
+    if isLeaf(tree):
+        return []
+    elif isLeaf(tree[1]) and isLeaf(tree[2]):
+        return [(tree[0], tree[1][0]), (tree[0], tree[2][0])]
+    else:
+        return [(tree[0], tree[1][0]), (tree[0], tree[2][0])] + getEdges(tree[1]) + getEdges(tree[2])
 
 def NNIheuristic(FASTAFile, sampleSize):
     """"Find the maximum parsimony score for that tree"""
@@ -283,6 +291,7 @@ def NNIheuristic(FASTAFile, sampleSize):
 	
 testList1 = ["a_1", "a_1_1", "a_2", "a_2_1", "b_1", "b_1_1"]
 testList2 = ["a_1", "a_1_1", "b_2", "b_2_1", "b_1", "b_1_1"]
+testTree = (1, ("a", (), ()), (2, ("b_1", (), ()), ("b_2", (), ())))
 
 
 
