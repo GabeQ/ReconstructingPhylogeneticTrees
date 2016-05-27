@@ -11,6 +11,9 @@ import networkx as nx
 import uuid
 import time
 
+from threading import Thread
+import Queue
+
 def isLeaf(tree):
     """is the tree a leaf, returns true or false"""
     if tree[1] == () and tree[2] == ():
@@ -52,20 +55,43 @@ def bestSinglePosition(tree, character, position, tipMapping, memo):
             ans = minR + minL
             memo[(tree, character)] = ans
             return ans
-
+            
 def maxParsimony(tree, tipMapping):
     """computes the best score for all positions in a sequence and for all possible characters"""
     keys = tipMapping.keys()
     length = len(tipMapping[keys[0]])
     ans = 0
     for position in range(length):
+        threads = []
         minScore = float("inf")
+        que = Queue.Queue()
         for char in ["A", "T", "C", "G"]:
-            score = bestSinglePosition(tree, char, position, tipMapping, {})
+            args = (tree, char, position, tipMapping, {})
+            thread = Thread(target=lambda q, arg: q.put(bestSinglePosition(args[0],args[1],args[2],args[3],args[4])), args=(que, args))
+            thread.start()
+            threads.append(thread)
+        for thread in threads:
+            thread.join()
+        while not que.empty():
+            score = que.get()
             if score < minScore:
                 minScore = score
         ans += minScore
     return ans
+    
+#def maxParsimony(tree, tipMapping):
+#    """computes the best score for all positions in a sequence and for all possible characters"""
+#    keys = tipMapping.keys()
+#    length = len(tipMapping[keys[0]])
+#    ans = 0
+#    for position in range(length):
+#        minScore = float("inf")
+#        for char in ["A", "T", "C", "G"]:
+#            score = bestSinglePosition(tree, char, position, tipMapping, {})
+#            if score < minScore:
+#                minScore = score
+#        ans += minScore
+#    return ans
 
 def RLRtoNewick(tree):
     """converts from Root,Left,Right format trees to Newick format trees """
@@ -245,7 +271,6 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
         makeGraph(graph, tree)
         leaves = getLeaves(tree)
         currentFeasible = isFeasible(graph,leaves)
-        print "currentFeasible: ", currentFeasible
         
         NNIs = allNNIs(tree)
         if len(NNIs)-1 < sampleSize:
@@ -260,8 +285,7 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
             makeGraph(graph, tree)
             leaves = getLeaves(tree)
             if isFeasible(graph, leaves): #if this NNI is possible
-                feasible.append(tree)
-                print "appened feasible NNI!"
+                feasible.append(tree) 
             else:
                 infeasible.append(tree) #if this NNI is not possible
                 print "appened infeasible NNI"
