@@ -9,6 +9,7 @@ import random
 import cStringIO
 import networkx as nx
 import uuid
+import time
 
 def isLeaf(tree):
     """is the tree a leaf, returns true or false"""
@@ -117,8 +118,9 @@ def go(tree):
     return goLeft(tree) + goRight(tree)
 
 def allNNIs(tree):
-    """ "takes a root-left-right tree as input, finds all of the re-rootings of this tree, 
-    and then returns a list of all of the NNI trees for those re-rootings in root-left-right format" """
+    """ input: root-left-right tree
+    finds all of the re-rootings of this tree, 
+    returns: list of of the NNI re-rootings in RLR format"""
     tree1 = RLRtoNewick(tree)
     reRooted = go(tree1)
     NNIs = []
@@ -156,7 +158,7 @@ def getGeneGroups(leaves):
         groups.append(group)
     return groups       
                                        
-def isFeasible(graph, leaves):
+def isFeasible(graph, leaves): #checks if the tree is possible
     geneGroups = getGeneGroups(leaves)
     groupPaths = []
     notFeasable = []
@@ -175,9 +177,8 @@ def isFeasible(graph, leaves):
                     feasable = False
                     notFeasable.append((groupPaths[i][0], groupPaths[j][0]))
     return feasable
-          
-                #takes RLR tree        
-def makeGraph(graph, tree):
+                  
+def makeGraph(graph, tree): #takes RLR tree
     if isLeaf(tree):
         return tree[0]
     else:
@@ -185,9 +186,8 @@ def makeGraph(graph, tree):
         graph.add_edge(uniqueId, makeGraph(graph, tree[1]))
         graph.add_edge(uniqueId, makeGraph(graph, tree[2]))
         return uniqueId
-      
-      #takes RLR tree  
-def getLeaves(tree):
+        
+def getLeaves(tree): #takes RLR tree
     if isLeaf(tree):
         return [tree[0]]
     else:
@@ -195,6 +195,10 @@ def getLeaves(tree):
 
 def NNIheuristic(FASTAFile, sampleSize, threshold):
     """"Find the maximum parsimony score for that tree"""
+    
+    #start time
+    startTime = time.time()
+    
     # Import fasta alignment file
     myAlignment = AlignIO.read(FASTAFile, "fasta")
     
@@ -208,9 +212,7 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
     myMatrix = calculator.get_distance(myAlignment)
     constructor = DistanceTreeConstructor()
     upgmaTree = constructor.upgma(myMatrix)
-    
-  #  Phylo.draw(upgmaTree)
-    
+        
     # Convert phyloxml tree to newick
     # biopython does not provide a function to do this so it was necessary
     # to write to a buffer in newick to convert then get rid of unneeded info
@@ -249,11 +251,11 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
             graph = nx.Graph()
             makeGraph(graph, tree)
             leaves = getLeaves(tree)
-            if isFeasible(graph, leaves):
+            if isFeasible(graph, leaves): #if this NNI is possible
                 feasible.append(tree)
             else:
-                infeasible.append(tree)
-        if len(feasible) != 0:
+                infeasible.append(tree) #if this NNI is not possible
+        if len(feasible) != 0: #if any possible NNIs we're found
             #print feasible
             scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), feasible)
             sortedList = sorted(scoredList)
@@ -261,29 +263,30 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
             if not currentFeasible or sortedList[0][0] < score:
                 score = sortedList[0][0]
                 tree = sortedList[0][1]
-            else:
+            else: 
                 break  
-        else:
-            if currentFeasible:
+        else: #if no possible NNIs we're found 
+            if currentFeasible: #checks if the original tree was feasible
                 break
-            counter += 1
+            counter += 1 
             print counter
             if counter >= threshold:
                 return "no feasible tree found"
             scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), infeasible)
             sortedList = sorted(scoredList)
             choseNeighbor = False    
-            for neighbor in sortedList:
+            for neighbor in sortedList: #if the original tree was infeasible and no feasible neighbors were found, take the next best infeasible tree and run again
                 if neighbor[0] > score:
                     score = neighbor[0]
                     tree = neighbor[1]
                     choseNeighbor = True
                     break
-            if not choseNeighbor:
+            if not choseNeighbor: 
                 score = sortedList[-1][0]
                 tree = sortedList[-1][1]
     outputTree = RLRtoNewick(tree)
     print "THE REAL SCORE", score
+    print("--- %s seconds ---" % (time.time() - startTime))
     return outputTree
     
 
