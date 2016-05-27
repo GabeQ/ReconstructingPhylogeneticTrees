@@ -11,6 +11,7 @@ import networkx as nx
 import pylab
 import os
 import tempfile
+import uuid
 
 def isLeaf(tree):
     """is the tree a leaf, returns true or false"""
@@ -195,9 +196,20 @@ def isFeasible(graph, leaves):
                     notFeasable.append((groupPaths[i][0], groupPaths[j][0]))
     return feasable
                 
+def makeGraph(graph, tree):
+    if isLeaf(tree):
+        return tree[0]
+    else:
+        uniqueId = str(uuid.uuid1())
+        graph.add_edge(uniqueId, makeGraph(graph, tree[1]))
+        graph.add_edge(uniqueId, makeGraph(graph, tree[2]))
+        return uniqueId
         
-        
-    
+def getLeaves(tree):
+    if isLeaf(tree):
+        return [tree[0]]
+    else:
+        return getLeaves(tree[1]) + getLeaves(tree[2])
 
 def NNIheuristic(FASTAFile, sampleSize):
     """"Find the maximum parsimony score for that tree"""
@@ -232,6 +244,7 @@ def NNIheuristic(FASTAFile, sampleSize):
     tree = NewicktoRLR(tree)
     
     score = maxParsimony(tree, tipMapping)
+    print tree
     print score
     
     # Perform NNI heuristic
@@ -242,11 +255,15 @@ def NNIheuristic(FASTAFile, sampleSize):
         toScore = random.sample(NNIs, sampleSize)
         # add feasibility test
         feasible = []
-        for x in toScore:
-            testTree = RLRtoPhyloxmlConverter(x)
-            if isFeasible(testTree) == true:
-                feasible.append(testTree)
-        
+        for tree in toScore:
+            graph = nx.Graph()
+            makeGraph(graph, tree)
+            leaves = getLeaves(tree)
+            if isFeasible(graph, leaves) == True:
+                feasible.append(tree)
+            else:
+                print "false"
+        print feasible
         scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), feasible)
         sortedlist = sorted(scoredList)
         if sortedlist[0][0] < score:
