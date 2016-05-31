@@ -313,11 +313,11 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
                 currentFeasible = True
                 output.write("Found a New Feasible Tree!\n\n")
             else:
-                output.write("Best Possible Feasible Tree Found\n" + str(tree) + "\n" + "Score: " + str(score))
+                output.write("Best Possible Feasible Tree Found\n" + str(tree) + "\n" + "Score: " + str(score) + "\n\n")
                 break
         else: #if no possible trees we're found
             if currentFeasible: #checks if the original tree was feasible
-                output.write("No Feasible Neighbors, Best Possible Feasible Tree\n" + str(tree) + "\n")
+                output.write("No Feasible Neighbors, Best Possible Feasible Tree\n" + str(tree) + "\n\n")
                 break
             counter += 1
             if counter >= threshold:
