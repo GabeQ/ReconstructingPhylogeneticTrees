@@ -56,7 +56,7 @@ def bestSinglePosition(tree, character, position, tipMapping, memo):
             ans = minR + minL
             memo[(tree, character)] = ans
             return ans
-            
+'''           
 def maxParsimony(tree, tipMapping):
     """computes the best score for all positions in a sequence and for all possible characters"""
     keys = tipMapping.keys()
@@ -78,21 +78,21 @@ def maxParsimony(tree, tipMapping):
             if score < minScore:
                 minScore = score
         ans += minScore
-    return ans
+    return ans'''
     
-#def maxParsimony(tree, tipMapping):
-#    """computes the best score for all positions in a sequence and for all possible characters"""
-#    keys = tipMapping.keys()
-#    length = len(tipMapping[keys[0]])
-#    ans = 0
-#    for position in range(length):
-#        minScore = float("inf")
-#        for char in ["A", "T", "C", "G"]:
-#            score = bestSinglePosition(tree, char, position, tipMapping, {})
-#            if score < minScore:
-#                minScore = score
-#        ans += minScore
-#    return ans
+def maxParsimony(tree, tipMapping):
+    """computes the best score for all positions in a sequence and for all possible characters"""
+    keys = tipMapping.keys()
+    length = len(tipMapping[keys[0]])
+    ans = 0
+    for position in range(length):
+        minScore = float("inf")
+        for char in ["A", "T", "C", "G"]:
+            score = bestSinglePosition(tree, char, position, tipMapping, {})
+            if score < minScore:
+               minScore = score
+        ans += minScore
+    return ans
 
 def RLRtoNewick(tree):
     """converts from Root,Left,Right format trees to Newick format trees """
@@ -313,7 +313,7 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
                 currentFeasible = True
                 output.write("Found a New Feasible Tree!\n\n")
             else:
-                output.write("Best Possible Feasible Tree Found\n" + str(tree) + "\n")
+                output.write("Best Possible Feasible Tree Found\n" + str(tree) + "\n" + "Score: " + str(score))
                 break
         else: #if no possible trees we're found
             if currentFeasible: #checks if the original tree was feasible
