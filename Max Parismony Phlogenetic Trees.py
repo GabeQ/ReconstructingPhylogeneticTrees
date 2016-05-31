@@ -231,10 +231,10 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
     """"Find the maximum parsimony score for that tree"""
     random.seed(0)
     output = open("NNIheuristic.txt", 'a')
-    output.write("\\\\\\\\\\\\\\\\\\\\\\RUN STARTS HERE \\\\\\\\\\\\\\\\\\\\\\\\\n")
+    output.write("*****************RUN STARTS HERE*****************")
     #start time
     startTime = time.clock()
-    output.write("Filname: " + FASTAFile + "\n")
+    output.write("\n" + "Filname: " + FASTAFile + "\n")
     output.write("Program Start: {:%Y-%m-%d %H:%M:%S}".format(datetime.datetime.now()) + "\n")
     output.write("Sample Size: " + str(sampleSize) + "\nThreshold: " + str(threshold) + "\n\n")
     # Import fasta alignment file
