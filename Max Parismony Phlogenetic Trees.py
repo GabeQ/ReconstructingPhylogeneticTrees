@@ -231,7 +231,7 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
     """"Find the maximum parsimony score for that tree"""
     random.seed(0)
     output = open("NNIheuristic.txt", 'a')
-    output.write("\\\\\\\\\\\\\\\\\\\\\\RUN STARTS HERE \\\\\\\\\\\\\\\\\\\\\\\\")
+    output.write("\\\\\\\\\\\\\\\\\\\\\\RUN STARTS HERE \\\\\\\\\\\\\\\\\\\\\\\\\n")
     #start time
     startTime = time.clock()
     output.write("Filname: " + FASTAFile + "\n")
