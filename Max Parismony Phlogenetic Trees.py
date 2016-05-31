@@ -78,8 +78,8 @@ def maxParsimony(tree, tipMapping):
             if score < minScore:
                 minScore = score
         ans += minScore
-    return ans'''
-    
+    return ans
+'''    
 def maxParsimony(tree, tipMapping):
     """computes the best score for all positions in a sequence and for all possible characters"""
     keys = tipMapping.keys()
