@@ -296,8 +296,8 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
                 feasible.append(tree)
             else:
                 infeasible.append(tree) #if this tree is not possible
-        output.write("Number of Feasible Trees: " + str(len(feasible)) + "\n")
-        output.write("Number of Infeasible Trees: " + str(len(infeasible)) + "\n")
+        output.write("Number of Feasible Neighbor Trees: " + str(len(feasible)) + "\n")
+        output.write("Number of Infeasible Neighbor Trees: " + str(len(infeasible)) + "\n")
         if len(feasible) != 0: #if feasible trees were found
             if isFeasible(graph, leaves): #if this NNI is possible
                 feasible.append(tree) 
@@ -320,8 +320,9 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
                 output.write("No Feasible Neighbors, Best Possible Feasible Tree\n" + str(tree) + "\n\n")
                 break
             counter += 1
+            output.write("Threshold counter: " + str(counter) + "\n\n")
             if counter >= threshold:
-                output.write("Threshold Met: No Feasible Tree Found\n")
+                output.write("Threshold Met: No Feasible Tree Found\n\n")
                 return
             output.write("Searching Infeasible Space\n")
             scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), infeasible)
