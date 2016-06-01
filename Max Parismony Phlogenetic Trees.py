@@ -10,6 +10,7 @@ import cStringIO
 import networkx as nx
 import uuid
 import time
+import datetime
 
 from threading import Thread
 import Queue
@@ -55,7 +56,7 @@ def bestSinglePosition(tree, character, position, tipMapping, memo):
             ans = minR + minL
             memo[(tree, character)] = ans
             return ans
-            
+'''           
 def maxParsimony(tree, tipMapping):
     """computes the best score for all positions in a sequence and for all possible characters"""
     keys = tipMapping.keys()
@@ -78,20 +79,20 @@ def maxParsimony(tree, tipMapping):
                 minScore = score
         ans += minScore
     return ans
-    
-#def maxParsimony(tree, tipMapping):
-#    """computes the best score for all positions in a sequence and for all possible characters"""
-#    keys = tipMapping.keys()
-#    length = len(tipMapping[keys[0]])
-#    ans = 0
-#    for position in range(length):
-#        minScore = float("inf")
-#        for char in ["A", "T", "C", "G"]:
-#            score = bestSinglePosition(tree, char, position, tipMapping, {})
-#            if score < minScore:
-#                minScore = score
-#        ans += minScore
-#    return ans
+'''    
+def maxParsimony(tree, tipMapping):
+    """computes the best score for all positions in a sequence and for all possible characters"""
+    keys = tipMapping.keys()
+    length = len(tipMapping[keys[0]])
+    ans = 0
+    for position in range(length):
+        minScore = float("inf")
+        for char in ["A", "T", "C", "G"]:
+            score = bestSinglePosition(tree, char, position, tipMapping, {})
+            if score < minScore:
+               minScore = score
+        ans += minScore
+    return ans
 
 def RLRtoNewick(tree):
     """converts from Root,Left,Right format trees to Newick format trees """
@@ -228,10 +229,14 @@ def getEdges(tree):
 
 def NNIheuristic(FASTAFile, sampleSize, threshold):
     """"Find the maximum parsimony score for that tree"""
-    
+    random.seed(0)
+    output = open("NNIheuristic.txt", 'a')
+    output.write("*****************RUN STARTS HERE!*****************")
     #start time
-    startTime = time.time()
-    
+    startTime = time.clock()
+    output.write("\n" + "Filname: " + FASTAFile + "\n")
+    output.write("Program Start: {:%Y-%m-%d %H:%M:%S}".format(datetime.datetime.now()) + "\n")
+    output.write("Sample Size: " + str(sampleSize) + "\nThreshold: " + str(threshold) + "\n\n")
     # Import fasta alignment file
     myAlignment = AlignIO.read(FASTAFile, "fasta")
     
@@ -259,19 +264,22 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
     tree = literal_eval(tree)    #newick format
 
     # RLR tree required for maxParsimony function
-    tree = NewicktoRLR(tree) 
+    tree = NewicktoRLR(tree)
     score = maxParsimony(tree, tipMapping)
-  #  print tree
-    print "ORIGINAL SCORE", score
+    graph = nx.Graph()
+    makeGraph(graph, tree)
+    leaves = getLeaves(tree)
+    currentFeasible = isFeasible(graph,leaves)
     
     # Perform NNI heuristic
     counter = 0
+    loopCounter = 0
     while True:
-        graph = nx.Graph()
-        makeGraph(graph, tree)
-        leaves = getLeaves(tree)
-        currentFeasible = isFeasible(graph,leaves)
-        
+        loopCounter += 1
+        loopTime = time.clock()
+        output.write("Loop Iteration: " + str(loopCounter) + "\n")
+        output.write("Loop Start Time: {:%H:%M:%S}".format(datetime.datetime.now()) + "\n")
+        output.write("Current Tree\nFeasibility: " + str(currentFeasible) + "\nScore: " + str(score) + "\nTree:\n" + str(tree) + "\n\n")
         NNIs = allNNIs(tree)
         if len(NNIs)-1 < sampleSize:
             sampleSize = len(NNIs)-1
@@ -284,30 +292,39 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
             graph = nx.Graph()
             makeGraph(graph, tree)
             leaves = getLeaves(tree)
+            if isFeasible(graph, leaves): #if this tree is possible
+                feasible.append(tree)
+            else:
+                infeasible.append(tree) #if this tree is not possible
+        output.write("Number of Feasible Neighbor Trees: " + str(len(feasible)) + "\n")
+        output.write("Number of Infeasible Neighbor Trees: " + str(len(infeasible)) + "\n")
+        if len(feasible) != 0: #if feasible trees were found
             if isFeasible(graph, leaves): #if this NNI is possible
                 feasible.append(tree) 
             else:
                 infeasible.append(tree) #if this NNI is not possible
-                print "appened infeasible NNI"
         if len(feasible) != 0: #if feasible NNIs were found
-            print "found feasible NNIs, scoring them now"
             scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), feasible)
             sortedList = sorted(scoredList)
             counter = 0
             if not currentFeasible or sortedList[0][0] < score:
                 score = sortedList[0][0]
                 tree = sortedList[0][1]
-                print "current score:", score
-            else: 
-                break  
-        else: #if no feasible NNIs were found 
-            print "no feasible NNIs were found"
-            if currentFeasible: #checks if the original tree was feasible
+                currentFeasible = True
+                output.write("Found a New Feasible Tree!\n\n")
+            else:
+                output.write("Best Possible Feasible Tree Found\n" + str(tree) + "\n" + "Score: " + str(score) + "\n\n")
                 break
-            counter += 1 
-            print "counter: ", counter
+        else: #if no possible trees we're found
+            if currentFeasible: #checks if the original tree was feasible
+                output.write("No Feasible Neighbors, Best Possible Feasible Tree\n" + str(tree) + "\n\n")
+                break
+            counter += 1
+            output.write("Threshold counter: " + str(counter) + "\n\n")
             if counter >= threshold:
-                return "no feasible tree found"
+                output.write("Threshold Met: No Feasible Tree Found\n\n")
+                return
+            output.write("Searching Infeasible Space\n")
             scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), infeasible)
             sortedList = sorted(scoredList)
             choseNeighbor = False    
@@ -320,10 +337,14 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
             if not choseNeighbor: 
                 score = sortedList[-1][0]
                 tree = sortedList[-1][1]
-    outputTree = RLRtoNewick(tree)
-    print "THE REAL SCORE", score
-    print "time:", (" %s seconds " % (time.time()-startTime))
-    return outputTree
+            currentFeasible = False
+            output.write("Next Best Infeasible Tree\n\n")
+    endTime = (time.clock() - startTime)
+    output.write(str(endTime) + " seconds" + "\n\n")
+                
+    #outputTree = RLRtoNewick(tree)
+    #print "Final score", score
+    return
     
 
 	
@@ -337,6 +358,3 @@ testTree = (1, ("a", (), ()), (2, ("b_1", (), ()), ("b_2", (), ())))
 3. test the neighbors for feasibility, only score those that are feasible
 4. if you find a tree that is feasible and has a better score than the current saved score, save the new lower score and tree associated
 """
-
-
-
