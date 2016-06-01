@@ -12,8 +12,8 @@ import uuid
 import time
 import datetime
 
-from threading import Thread
-import Queue
+#from threading import Thread
+#import Queue
 
 def isLeaf(tree):
     """is the tree a leaf, returns true or false"""
@@ -227,10 +227,13 @@ def getEdges(tree):
         return [(tree[0], tree[1][0]), (tree[0], tree[2][0])]
     else: return [(tree[0], tree[1][0]), (tree[0], tree[2][0])] + getEdges(tree[1]) + getEdges(tree[2])
 
-def NNIheuristic(FASTAFile, sampleSize, threshold):
+def NNIheuristic(FASTAFile, sampleSize, threshold, outputDir):
     """"Find the maximum parsimony score for that tree"""
     random.seed(0)
-    output = open("NNIheuristic.txt", 'a')
+    outputFile = FASTAFile.replace(".align", ".out")
+    if "/" in outputFile:
+        outputFile = outputFile[outputFile.rfind("/"):]
+    output = open(outputDir + "/" + outputFile, 'w')
     output.write("*****************RUN STARTS HERE!*****************")
     #start time
     startTime = time.clock()
@@ -276,7 +279,6 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
     loopCounter = 0
     while True:
         loopCounter += 1
-        loopTime = time.clock()
         output.write("Loop Iteration: " + str(loopCounter) + "\n")
         output.write("Loop Start Time: {:%H:%M:%S}".format(datetime.datetime.now()) + "\n")
         output.write("Current Tree\nFeasibility: " + str(currentFeasible) + "\nScore: " + str(score) + "\nTree:\n" + str(tree) + "\n\n")
@@ -322,6 +324,8 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
             counter += 1
             if counter >= threshold:
                 output.write("Threshold Met: No Feasible Tree Found\n")
+                stopTime = (time.clock() - startTime)
+                output.write("Program Stop: " + str(stopTime) + " seconds\n\n")
                 return
             output.write("Searching Infeasible Space\n")
             scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), infeasible)
@@ -339,7 +343,7 @@ def NNIheuristic(FASTAFile, sampleSize, threshold):
             currentFeasible = False
             output.write("Next Best Infeasible Tree\n\n")
     endTime = (time.clock() - startTime)
-    output.write(str(endTime) + " seconds" + "\n\n")
+    output.write("Program End: " + str(endTime) + " seconds\n\n")
                 
     #outputTree = RLRtoNewick(tree)
     #print "Final score", score
