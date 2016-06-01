@@ -227,7 +227,7 @@ def getEdges(tree):
         return [(tree[0], tree[1][0]), (tree[0], tree[2][0])]
     else: return [(tree[0], tree[1][0]), (tree[0], tree[2][0])] + getEdges(tree[1]) + getEdges(tree[2])
 
-def NNIheuristic(FASTAFile, sampleSize, threshold):
+def NNIHeuristic(FASTAFile, sampleSize, threshold):
     """"Find the maximum parsimony score for that tree"""
     random.seed(0)
     output = open("NNIheuristic.txt", 'a')
