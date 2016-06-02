@@ -227,7 +227,7 @@ def getEdges(tree):
         return [(tree[0], tree[1][0]), (tree[0], tree[2][0])]
     else: return [(tree[0], tree[1][0]), (tree[0], tree[2][0])] + getEdges(tree[1]) + getEdges(tree[2])
 
-def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
+def NNIheuristic(FASTAFile, sampleSize, threshold, outputDir):
     """"Find the maximum parsimony score for that tree"""
     random.seed(0)
     outputFile = FASTAFile.replace(".align", ".out")
@@ -251,8 +251,11 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
     # Compute a distance matrix and construct tree
     calculator = DistanceCalculator("identity") 
     myMatrix = calculator.get_distance(myAlignment)
+    output.write("matrix constructed here")
     constructor = DistanceTreeConstructor()
     upgmaTree = constructor.upgma(myMatrix)
+    
+    output.write("constructed upgma tree")
         
     # Convert phyloxml tree to newick
     # biopython does not provide a function to do this so it was necessary
@@ -265,19 +268,24 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
     tree = re.sub(r'Inner\d*', '', tree)
     tree = tree.replace(";", "")
     tree = literal_eval(tree)    #newick format
+    output.write("created the original tree into newick format")
 
     # RLR tree required for maxParsimony function
     tree = NewicktoRLR(tree)
     score = maxParsimony(tree, tipMapping)
     graph = nx.Graph()
     makeGraph(graph, tree)
+    output.write("made a graph")
     leaves = getLeaves(tree)
     currentFeasible = isFeasible(graph,leaves)
-        
+    
+    output.write("tested isFeasible")
+    
     # Perform NNI heuristic
     counter = 0
     loopCounter = 0
     while True:
+        output.write("in the while loop")
         loopCounter += 1
         output.write("Loop Iteration: " + str(loopCounter) + "\n")
         output.write("Loop Start Time: {:%H:%M:%S}".format(datetime.datetime.now()) + "\n")
@@ -288,6 +296,7 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
         toScore = random.sample(NNIs, sampleSize)
         
         # add feasibility test
+        output.write("starting feasibility test")
         feasible = []
         infeasible = []
         for tree in toScore:
@@ -355,3 +364,10 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
 testList1 = ["a_1", "a_1_1", "a_2", "a_2_1", "b_1", "b_1_1"]
 testList2 = ["a_1", "a_1_1", "b_2", "b_2_1", "b_1", "b_1_1"]
 testTree = (1, ("a", (), ()), (2, ("b_1", (), ()), ("b_2", (), ())))
+
+"""
+1. test if the original tree is feasible, if it is, set the score to it's score
+2. if the original test is not, set score to equal float("inf")
+3. test the neighbors for feasibility, only score those that are feasible
+4. if you find a tree that is feasible and has a better score than the current saved score, save the new lower score and tree associated
+"""
