@@ -1,9 +1,10 @@
 import os
+import sys
 from multiprocessing import Pool
 import NNIHeuristic as NNI
+import errno
 
-def runAll(dataDir, sampleSize, threshold, outputDir):
-    p = Pool(5)
+def getNNIArgs(dataDir, sampleSize, threshold, outputDir):
     args = []
     midDirs = next(os.walk(dataDir))[1] # sim-flies
     for midDir in midDirs:
@@ -14,7 +15,23 @@ def runAll(dataDir, sampleSize, threshold, outputDir):
                 if f.endswith('.align'):
                     dataPath = dataDir + "/" + midDir + "/" + bottomDir + "/" + f
                     outputPath = outputDir + "/" + midDir + "/" + bottomDir + "/"
-                    os.makedirs(outputPath, exist_ok=True)
+                    if not os.path.exists(os.path.dirname(outputPath)):
+                        try:
+                            os.makedirs(os.path.dirname(outputPath))
+                        except OSError as exc: # Guard against race condition
+                            if exc.errno != errno.EEXIST:
+                                raise
                     args.append((dataPath, sampleSize, threshold, outputPath))
-    p.map(NNI.NNIHeuristic, args)
-                    
+    return args
+    
+def callNNI(args):
+    NNI.NNIHeuristic(args[0], args[1], args[2], args[3])
+
+if __name__ == '__main__':
+    dataDir = sys.argv[1]
+    sampleSize = int(sys.argv[2])
+    threshold = int(sys.argv[3])
+    outputDir = sys.argv[4]
+    num_processors = int(sys.argv[5])
+    p = Pool(num_processors)
+    p.map(callNNI, getNNIArgs(dataDir, sampleSize, threshold, outputDir))
