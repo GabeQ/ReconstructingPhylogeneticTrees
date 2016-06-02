@@ -237,7 +237,7 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
     output.write("*****************RUN STARTS HERE!*****************")
     #start time
     startTime = time.clock()
-    output.write("\n" + "Filname: " + FASTAFile + "\n")
+    output.write("\n" + "Filename: " + FASTAFile + "\n")
     output.write("Program Start: {:%Y-%m-%d %H:%M:%S}".format(datetime.datetime.now()) + "\n")
     output.write("Sample Size: " + str(sampleSize) + "\nThreshold: " + str(threshold) + "\n\n")
     # Import fasta alignment file
