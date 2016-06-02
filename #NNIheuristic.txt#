@@ -1,0 +1,388 @@
+*****************RUN STARTS HERE!*****************
+Filname: /Users/cssummer16/ReconstructingPhylogeneticTrees/infeasible.afa
+Program Start: 2016-06-01 09:25:18
+Sample Size: 50
+Threshold: 100
+
+Loop Iteration: 1
+Loop Start Time: 09:25:18
+Current Tree
+Feasibility: False
+Score: 10
+Tree:
+('Anc', ('a_4_1', (), ()), ('Anc', ('Anc', ('Anc', ('b_1_1', (), ()), ('b_1', (), ())), ('a_3_1', (), ())), ('Anc', ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())), ('Anc', ('a_3', (), ()), ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ())))))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 13
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 2
+Loop Start Time: 09:25:18
+Current Tree
+Feasibility: False
+Score: 11
+Tree:
+('Anc', ('Anc', ('Anc', ('a_4_1', (), ()), ('Anc', ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())), ('Anc', ('a_3', (), ()), ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ())))))), ('b_1', (), ())), ('Anc', ('b_1_1', (), ()), ('a_3_1', (), ())))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 11
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 3
+Loop Start Time: 09:25:18
+Current Tree
+Feasibility: False
+Score: 12
+Tree:
+('Anc', ('Anc', ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())), ('Anc', ('b_1', (), ()), ('Anc', ('b_1_1', (), ()), ('a_3_1', (), ())))), ('Anc', ('a_4_1', (), ()), ('Anc', ('a_3', (), ()), ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ()))))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 11
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 4
+Loop Start Time: 09:25:18
+Current Tree
+Feasibility: False
+Score: 13
+Tree:
+('Anc', ('Anc', ('Anc', ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())), ('Anc', ('b_1', (), ()), ('Anc', ('b_1_1', (), ()), ('a_3_1', (), ())))), ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ())))), ('Anc', ('a_3', (), ()), ('a_4_1', (), ())))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 11
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 5
+Loop Start Time: 09:25:18
+Current Tree
+Feasibility: False
+Score: 13
+Tree:
+('Anc', ('Anc', ('b_1_1', (), ()), ('Anc', ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())), ('Anc', ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ()))), ('Anc', ('a_3', (), ()), ('a_4_1', (), ()))))), ('Anc', ('b_1', (), ()), ('a_3_1', (), ())))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 11
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 6
+Loop Start Time: 09:25:18
+Current Tree
+Feasibility: False
+Score: 13
+Tree:
+('Anc', ('Anc', ('a_4', (), ()), ('Anc', ('a_3', (), ()), ('a_4_1', (), ()))), ('Anc', ('Anc', ('a_2', (), ()), ('a_1', (), ())), ('Anc', ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())), ('Anc', ('b_1_1', (), ()), ('Anc', ('b_1', (), ()), ('a_3_1', (), ()))))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 11
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 7
+Loop Start Time: 09:25:18
+Current Tree
+Feasibility: False
+Score: 14
+Tree:
+('Anc', ('Anc', ('Anc', ('Anc', ('a_4', (), ()), ('Anc', ('a_3', (), ()), ('a_4_1', (), ()))), ('Anc', ('a_2', (), ()), ('a_1', (), ()))), ('Anc', ('b_1', (), ()), ('a_3_1', (), ()))), ('Anc', ('b_1_1', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ()))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 11
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 8
+Loop Start Time: 09:25:19
+Current Tree
+Feasibility: False
+Score: 15
+Tree:
+('Anc', ('Anc', ('Anc', ('a_4', (), ()), ('Anc', ('a_3', (), ()), ('a_4_1', (), ()))), ('Anc', ('b_1', (), ()), ('a_3_1', (), ()))), ('Anc', ('Anc', ('a_2', (), ()), ('a_1', (), ())), ('Anc', ('b_1_1', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 11
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 9
+Loop Start Time: 09:25:19
+Current Tree
+Feasibility: False
+Score: 15
+Tree:
+('Anc', ('Anc', ('b_1', (), ()), ('Anc', ('a_4', (), ()), ('Anc', ('a_3', (), ()), ('a_4_1', (), ())))), ('Anc', ('a_3_1', (), ()), ('Anc', ('Anc', ('a_2', (), ()), ('a_1', (), ())), ('Anc', ('b_1_1', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ()))))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 11
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 10
+Loop Start Time: 09:25:19
+Current Tree
+Feasibility: False
+Score: 16
+Tree:
+('Anc', ('Anc', ('Anc', ('Anc', ('b_1', (), ()), ('Anc', ('a_4', (), ()), ('Anc', ('a_3', (), ()), ('a_4_1', (), ())))), ('a_3_1', (), ())), ('a_1', (), ())), ('Anc', ('a_2', (), ()), ('Anc', ('b_1_1', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 11
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 11
+Loop Start Time: 09:25:19
+Current Tree
+Feasibility: False
+Score: 16
+Tree:
+('Anc', ('Anc', ('b_1', (), ()), ('Anc', ('a_1', (), ()), ('Anc', ('a_2', (), ()), ('Anc', ('b_1_1', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())))))), ('Anc', ('a_3_1', (), ()), ('Anc', ('a_4', (), ()), ('Anc', ('a_3', (), ()), ('a_4_1', (), ())))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 11
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 12
+Loop Start Time: 09:25:19
+Current Tree
+Feasibility: False
+Score: 16
+Tree:
+('Anc', ('Anc', ('b_1_1', (), ()), ('a_2', (), ())), ('Anc', ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())), ('Anc', ('a_1', (), ()), ('Anc', ('b_1', (), ()), ('Anc', ('a_3_1', (), ()), ('Anc', ('a_4', (), ()), ('Anc', ('a_3', (), ()), ('a_4_1', (), ()))))))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 11
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 13
+Loop Start Time: 09:25:19
+Current Tree
+Feasibility: False
+Score: 16
+Tree:
+('Anc', ('Anc', ('Anc', ('b_1_1', (), ()), ('a_2', (), ())), ('a_2_1', (), ())), ('Anc', ('Anc', ('a_1', (), ()), ('Anc', ('b_1', (), ()), ('Anc', ('a_3_1', (), ()), ('Anc', ('a_4', (), ()), ('Anc', ('a_3', (), ()), ('a_4_1', (), ())))))), ('a_1_1', (), ())))
+
+Number of Feasible Trees: 1
+Number of Infeasible Trees: 10
+Found a New Feasible Tree!
+
+Loop Iteration: 14
+Loop Start Time: 09:25:19
+Current Tree
+Feasibility: True
+Score: 15
+Tree:
+('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('b_1_1', (), ()), ('a_2', (), ())), ('a_2_1', (), ())), ('a_1_1', (), ())), ('a_1', (), ())), ('b_1', (), ())), ('a_3_1', (), ())), ('a_3', (), ())), ('Anc', ('a_4', (), ()), ('a_4_1', (), ())))
+
+Number of Feasible Trees: 10
+Number of Infeasible Trees: 1
+Found a New Feasible Tree!
+
+Loop Iteration: 15
+Loop Start Time: 09:25:19
+Current Tree
+Feasibility: True
+Score: 14
+Tree:
+('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('b_1_1', (), ()), ('a_2', (), ())), ('a_2_1', (), ())), ('a_1_1', (), ())), ('a_1', (), ())), ('b_1', (), ())), ('a_3', (), ())), ('Anc', ('a_3_1', (), ()), ('Anc', ('a_4', (), ()), ('a_4_1', (), ()))))
+
+Number of Feasible Trees: 7
+Number of Infeasible Trees: 4
+Best Possible Feasible Tree Found
+('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('b_1_1', (), ()), ('a_2', (), ())), ('a_2_1', (), ())), ('a_1_1', (), ())), ('a_1', (), ())), ('a_3', (), ())), ('Anc', ('b_1', (), ()), ('Anc', ('a_3_1', (), ()), ('Anc', ('a_4', (), ()), ('a_4_1', (), ())))))
+Score: 14
+
+1.09838 seconds
+
+*****************RUN STARTS HERE!*****************
+Filname: /Users/cssummer16/Desktop/sim-flies/100e6-1x/184/184.coal10.align
+Program Start: 2016-06-01 09:31:03
+Sample Size: 50
+Threshold: 100
+
+Loop Iteration: 1
+Loop Start Time: 09:31:05
+Current Tree
+Feasibility: True
+Score: 5221
+Tree:
+('Anc', ('Anc', ('dgri_13_1', (), ()), ('dgri_13', (), ())), ('Anc', ('Anc', ('Anc', ('dana_5_1', (), ()), ('dana_5', (), ())), ('Anc', ('dper_8_1', (), ()), ('dmoj_11_1', (), ()))), ('Anc', ('Anc', ('dper_8', (), ()), ('Anc', ('dpse_7_1', (), ()), ('dpse_7', (), ()))), ('Anc', ('Anc', ('dvir_12_1', (), ()), ('dvir_12', (), ())), ('dmoj_11', (), ())))))
+
+Number of Feasible Trees: 15
+Number of Infeasible Trees: 0
+Found a New Feasible Tree!
+
+Loop Iteration: 2
+Loop Start Time: 09:31:38
+Current Tree
+Feasibility: True
+Score: 5216
+Tree:
+('Anc', ('Anc', ('Anc', ('Anc', ('dgri_13_1', (), ()), ('dgri_13', (), ())), ('Anc', ('Anc', ('dper_8', (), ()), ('Anc', ('dpse_7_1', (), ()), ('dpse_7', (), ()))), ('Anc', ('Anc', ('dvir_12_1', (), ()), ('dvir_12', (), ())), ('dmoj_11', (), ())))), ('dmoj_11_1', (), ())), ('Anc', ('dper_8_1', (), ()), ('Anc', ('dana_5_1', (), ()), ('dana_5', (), ()))))
+
+Number of Feasible Trees: 15
+Number of Infeasible Trees: 0
+Found a New Feasible Tree!
+
+Loop Iteration: 3
+Loop Start Time: 09:32:10
+Current Tree
+Feasibility: True
+Score: 5205
+Tree:
+('Anc', ('Anc', ('Anc', ('dgri_13_1', (), ()), ('dgri_13', (), ())), ('Anc', ('dper_8_1', (), ()), ('Anc', ('dana_5_1', (), ()), ('dana_5', (), ())))), ('Anc', ('dmoj_11_1', (), ()), ('Anc', ('Anc', ('dper_8', (), ()), ('Anc', ('dpse_7_1', (), ()), ('dpse_7', (), ()))), ('Anc', ('Anc', ('dvir_12_1', (), ()), ('dvir_12', (), ())), ('dmoj_11', (), ())))))
+
+Number of Feasible Trees: 15
+Number of Infeasible Trees: 0
+Best Possible Feasible Tree Found
+('Anc', ('Anc', ('Anc', ('Anc', ('dgri_13_1', (), ()), ('dgri_13', (), ())), ('Anc', ('dper_8_1', (), ()), ('Anc', ('dana_5_1', (), ()), ('dana_5', (), ())))), ('Anc', ('Anc', ('dvir_12_1', (), ()), ('dvir_12', (), ())), ('dmoj_11', (), ()))), ('Anc', ('Anc', ('dper_8', (), ()), ('Anc', ('dpse_7_1', (), ()), ('dpse_7', (), ()))), ('dmoj_11_1', (), ())))
+Score: 5205
+
+103.466185 seconds
+
+*****************RUN STARTS HERE!*****************
+Filname: /Users/cssummer16/ReconstructingPhylogeneticTrees/infeasible.afa
+Program Start: 2016-06-01 09:36:33
+Sample Size: 5
+Threshold: 5
+
+Loop Iteration: 1
+Loop Start Time: 09:36:33
+Current Tree
+Feasibility: False
+Score: 10
+Tree:
+('Anc', ('a_4_1', (), ()), ('Anc', ('Anc', ('Anc', ('b_1_1', (), ()), ('b_1', (), ())), ('a_3_1', (), ())), ('Anc', ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())), ('Anc', ('a_3', (), ()), ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ())))))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 5
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 2
+Loop Start Time: 09:36:33
+Current Tree
+Feasibility: False
+Score: 11
+Tree:
+('Anc', ('Anc', ('Anc', ('a_4_1', (), ()), ('Anc', ('Anc', ('b_1_1', (), ()), ('b_1', (), ())), ('a_3_1', (), ()))), ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ())))), ('Anc', ('a_3', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ()))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 5
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 3
+Loop Start Time: 09:36:33
+Current Tree
+Feasibility: False
+Score: 12
+Tree:
+('Anc', ('Anc', ('b_1_1', (), ()), ('Anc', ('a_4_1', (), ()), ('Anc', ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ()))), ('Anc', ('a_3', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())))))), ('Anc', ('a_3_1', (), ()), ('b_1', (), ())))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 5
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 4
+Loop Start Time: 09:36:33
+Current Tree
+Feasibility: False
+Score: 12
+Tree:
+('Anc', ('Anc', ('a_4_1', (), ()), ('b_1_1', (), ())), ('Anc', ('Anc', ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ()))), ('Anc', ('a_3', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())))), ('Anc', ('a_3_1', (), ()), ('b_1', (), ()))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 5
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 5
+Loop Start Time: 09:36:33
+Current Tree
+Feasibility: False
+Score: 13
+Tree:
+('Anc', ('Anc', ('Anc', ('a_4_1', (), ()), ('b_1_1', (), ())), ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ())))), ('Anc', ('Anc', ('a_3_1', (), ()), ('b_1', (), ())), ('Anc', ('a_3', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 5
+Threshold Met: No Feasible Tree Found
+*****************RUN STARTS HERE!*****************
+Filname: /Users/cssummer16/ReconstructingPhylogeneticTrees/infeasible.afa
+Program Start: 2016-06-01 09:40:03
+Sample Size: 5
+Threshold: 5
+
+Loop Iteration: 1
+Loop Start Time: 09:40:03
+Current Tree
+Feasibility: False
+Score: 10
+Tree:
+('Anc', ('a_4_1', (), ()), ('Anc', ('Anc', ('Anc', ('b_1_1', (), ()), ('b_1', (), ())), ('a_3_1', (), ())), ('Anc', ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())), ('Anc', ('a_3', (), ()), ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ())))))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 5
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 2
+Loop Start Time: 09:40:03
+Current Tree
+Feasibility: False
+Score: 11
+Tree:
+('Anc', ('Anc', ('Anc', ('a_4_1', (), ()), ('Anc', ('Anc', ('b_1_1', (), ()), ('b_1', (), ())), ('a_3_1', (), ()))), ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ())))), ('Anc', ('a_3', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ()))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 5
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 3
+Loop Start Time: 09:40:03
+Current Tree
+Feasibility: False
+Score: 12
+Tree:
+('Anc', ('Anc', ('b_1_1', (), ()), ('Anc', ('a_4_1', (), ()), ('Anc', ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ()))), ('Anc', ('a_3', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())))))), ('Anc', ('a_3_1', (), ()), ('b_1', (), ())))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 5
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 4
+Loop Start Time: 09:40:03
+Current Tree
+Feasibility: False
+Score: 12
+Tree:
+('Anc', ('Anc', ('a_4_1', (), ()), ('b_1_1', (), ())), ('Anc', ('Anc', ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ()))), ('Anc', ('a_3', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())))), ('Anc', ('a_3_1', (), ()), ('b_1', (), ()))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 5
+Searching Infeasible Space
+Next Best Infeasible Tree
+
+Loop Iteration: 5
+Loop Start Time: 09:40:03
+Current Tree
+Feasibility: False
+Score: 13
+Tree:
+('Anc', ('Anc', ('Anc', ('a_4_1', (), ()), ('b_1_1', (), ())), ('Anc', ('a_4', (), ()), ('Anc', ('a_2', (), ()), ('a_1', (), ())))), ('Anc', ('Anc', ('a_3_1', (), ()), ('b_1', (), ())), ('Anc', ('a_3', (), ()), ('Anc', ('a_2_1', (), ()), ('a_1_1', (), ())))))
+
+Number of Feasible Trees: 0
+Number of Infeasible Trees: 5
+Threshold Met: No Feasible Tree Found
+0.252046 seconds
+
