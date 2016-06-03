@@ -206,7 +206,8 @@ def isFeasible(graph, leaves): #checks if the tree is possible
             geneLocus1 = geneGroups[i][0]
             geneLocus2 = geneGroups[j][0]
             if geneLocus1[:groupPaths[i][0].find('_')] == geneLocus2[:groupPaths[i][0].find('_')]:
-                if nx.has_path(intersectGraph, geneLocus1, geneLocus2):
+                if intersectGraph.has_node(geneLocus1) and intersectGraph.has_node(geneLocus2) \
+                   and nx.has_path(intersectGraph, geneLocus1, geneLocus2):
                     return False
     return True
                   
