@@ -188,8 +188,7 @@ def getGeneGroups(leaves):
 def isFeasible(graph, leaves): #checks if the tree is possible
     geneGroups = getGeneGroups(leaves)
     groupPaths = []
-    notFeasable = []
-    feasable = True
+    intersectGraph = nx.Graph()
     for group in geneGroups:
         groupName = group[0]
         pathNodes = set()
@@ -197,13 +196,19 @@ def isFeasible(graph, leaves): #checks if the tree is possible
             pathNodes = pathNodes.union(set(nx.shortest_path(graph, group[0], leaf, None)))
         groupPaths.append((groupName, pathNodes))
     for i in range(len(groupPaths)):
-        geneName = groupPaths[i][0][:groupPaths[i][0].find('_')]
+        geneLocus1 = groupPaths[i][0]
         for j in range(i+1, len(groupPaths)):
-            if groupPaths[j][0].startswith(geneName + '_'):
-                if groupPaths[i][1].intersection(groupPaths[j][1]) != set([]):
-                    feasable = False
-                    notFeasable.append((groupPaths[i][0], groupPaths[j][0]))
-    return feasable
+            geneLocus2 = groupPaths[j][0]
+            if groupPaths[i][1].intersection(groupPaths[j][1]) != set([]):
+                intersectGraph.add_edge(geneLocus1, geneLocus2)
+    for i in range(len(geneGroups)):
+        for j in range(i+1, len(geneGroups)):
+            geneLocus1 = geneGroups[i][0]
+            geneLocus2 = geneGroups[j][0]
+            if geneLocus1[:groupPaths[i][0].find('_')] == geneLocus2[:groupPaths[i][0].find('_')]:
+                if nx.has_path(intersectGraph, geneLocus1, geneLocus2):
+                    return False
+    return True
                   
 def makeGraph(graph, tree): #takes RLR tree
     if isLeaf(tree):
