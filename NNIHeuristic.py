@@ -286,6 +286,8 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
     # RLR tree required for maxParsimony function
     tree = NewicktoRLR(tree)
     score = maxParsimony(tree, tipMapping)
+    
+    #Graph required for feasibility check
     graph = nx.Graph()
     makeGraph(graph, tree)
     leaves = getLeaves(tree)
