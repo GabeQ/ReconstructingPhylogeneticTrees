@@ -95,7 +95,7 @@ def maxParsimony(tree, tipMapping):
     return ans
 
 def RLRtoNewick(tree):
-    """converts from Root,Left,Right format trees to Newick format trees """
+    """converts from Root,Left,Right (RLR) format trees to Newick format trees """
     if isLeaf(tree) == True:
         return tree[0]
     else:
@@ -320,7 +320,6 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
                 
         output.write("Number of Feasible Neighbor Trees: " + str(len(feasible)) + "\n")
         output.write("Number of Infeasible Neighbor Trees: " + str(len(infeasible)) + "\n")
-        
         if len(feasible) != 0: #if feasible NNIs were found
             scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), feasible)
             sortedList = sorted(scoredList)
@@ -365,7 +364,6 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
     #outputTree = RLRtoNewick(tree)
     #print "Final score", score
     return
-    
 
 	
 testList1 = ["a_1", "a_1_1", "a_2", "a_2_1", "b_1", "b_1_1"]
