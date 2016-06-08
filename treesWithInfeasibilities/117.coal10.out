@@ -1,0 +1,118 @@
+*****************RUN STARTS HERE!*****************
+Filename: /home/mdohlen/NNIHeuristic/sim-flies/100e6-1x/117/117.coal10.align
+Program Start: 2016-06-03 23:28:11
+Sample Size: 100
+Threshold: 25
+
+Loop Iteration: 1
+Loop Start Time: 23:28:31
+Current Tree
+Feasibility: False
+Score: 14216
+Tree:
+('Anc', ('Anc', ('dmoj_31_1', (), ()), ('dmoj_31', (), ())), ('Anc', ('Anc', ('dgri_33_1', (), ()), ('Anc', ('Anc', ('dwil_28_1', (), ()), ('dwil_28', (), ())), ('Anc', ('dpse_26_1', (), ()), ('Anc', ('dper_27_1', (), ()), ('dper_27', (), ()))))), ('Anc', ('Anc', ('dana_24_1', (), ()), ('dana_24', (), ())), ('Anc', ('Anc', ('Anc', ('Anc', ('dyak_15_1', (), ()), ('dyak_15', (), ())), ('Anc', ('dere_14', (), ()), ('dsec_11_1', (), ()))), ('Anc', ('dsec_11', (), ()), ('Anc', ('dsim_12_1', (), ()), ('dsim_12', (), ())))), ('Anc', ('Anc', ('Anc', ('dyak_23_1', (), ()), ('Anc', ('dsim_20_1', (), ()), ('Anc', ('Anc', ('dmel_17_1', (), ()), ('dmel_17', (), ())), ('Anc', ('dsim_20', (), ()), ('dsec_19_1', (), ()))))), ('Anc', ('Anc', ('dyak_23', (), ()), ('Anc', ('Anc', ('dere_22_1', (), ()), ('dere_22', (), ())), ('dsec_19', (), ()))), ('Anc', ('dmel_9', (), ()), ('Anc', ('dmel_9_1', (), ()), ('dere_14_1', (), ()))))), ('Anc', ('Anc', ('dvir_32_1', (), ()), ('dvir_32', (), ())), ('Anc', ('dgri_33', (), ()), ('dpse_26', (), ()))))))))
+
+Number of Feasible Neighbor Trees: 1
+Number of Infeasible Neighbor Trees: 58
+Found a New Feasible Tree!
+
+Loop Iteration: 2
+Loop Start Time: 23:28:46
+Current Tree
+Feasibility: True
+Score: 14210
+Tree:
+('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('dmoj_31_1', (), ()), ('dmoj_31', (), ())), ('Anc', ('dgri_33_1', (), ()), ('Anc', ('Anc', ('dwil_28_1', (), ()), ('dwil_28', (), ())), ('Anc', ('dpse_26_1', (), ()), ('Anc', ('dper_27_1', (), ()), ('dper_27', (), ())))))), ('Anc', ('dana_24_1', (), ()), ('dana_24', (), ()))), ('Anc', ('Anc', ('Anc', ('dyak_15_1', (), ()), ('dyak_15', (), ())), ('Anc', ('dere_14', (), ()), ('dsec_11_1', (), ()))), ('Anc', ('dsec_11', (), ()), ('Anc', ('dsim_12_1', (), ()), ('dsim_12', (), ()))))), ('Anc', ('Anc', ('dvir_32_1', (), ()), ('dvir_32', (), ())), ('Anc', ('dgri_33', (), ()), ('dpse_26', (), ())))), ('Anc', ('dmel_9', (), ()), ('Anc', ('dmel_9_1', (), ()), ('dere_14_1', (), ())))), ('Anc', ('Anc', ('dyak_23', (), ()), ('Anc', ('Anc', ('dere_22_1', (), ()), ('dere_22', (), ())), ('dsec_19', (), ()))), ('Anc', ('dyak_23_1', (), ()), ('Anc', ('dsim_20_1', (), ()), ('Anc', ('Anc', ('dmel_17_1', (), ()), ('dmel_17', (), ())), ('Anc', ('dsim_20', (), ()), ('dsec_19_1', (), ())))))))
+
+Number of Feasible Neighbor Trees: 59
+Number of Infeasible Neighbor Trees: 0
+Found a New Feasible Tree!
+
+Loop Iteration: 3
+Loop Start Time: 23:44:45
+Current Tree
+Feasibility: True
+Score: 14186
+Tree:
+('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('dmoj_31_1', (), ()), ('dmoj_31', (), ())), ('Anc', ('dgri_33_1', (), ()), ('Anc', ('Anc', ('dwil_28_1', (), ()), ('dwil_28', (), ())), ('Anc', ('dpse_26_1', (), ()), ('Anc', ('dper_27_1', (), ()), ('dper_27', (), ())))))), ('Anc', ('dana_24_1', (), ()), ('dana_24', (), ()))), ('Anc', ('Anc', ('Anc', ('dyak_15_1', (), ()), ('dyak_15', (), ())), ('Anc', ('dere_14', (), ()), ('dsec_11_1', (), ()))), ('Anc', ('dsec_11', (), ()), ('Anc', ('dsim_12_1', (), ()), ('dsim_12', (), ()))))), ('Anc', ('Anc', ('dvir_32_1', (), ()), ('dvir_32', (), ())), ('Anc', ('dgri_33', (), ()), ('dpse_26', (), ())))), ('Anc', ('dmel_9', (), ()), ('Anc', ('dmel_9_1', (), ()), ('dere_14_1', (), ())))), ('Anc', ('dyak_23', (), ()), ('Anc', ('Anc', ('dere_22_1', (), ()), ('dere_22', (), ())), ('dsec_19', (), ())))), ('dyak_23_1', (), ())), ('dsim_20_1', (), ())), ('dsec_19_1', (), ())), ('Anc', ('dsim_20', (), ()), ('Anc', ('dmel_17_1', (), ()), ('dmel_17', (), ()))))
+
+Number of Feasible Neighbor Trees: 57
+Number of Infeasible Neighbor Trees: 2
+Found a New Feasible Tree!
+
+Loop Iteration: 4
+Loop Start Time: 00:00:11
+Current Tree
+Feasibility: True
+Score: 14178
+Tree:
+('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('dmoj_31_1', (), ()), ('dmoj_31', (), ())), ('Anc', ('dgri_33_1', (), ()), ('Anc', ('Anc', ('dwil_28_1', (), ()), ('dwil_28', (), ())), ('Anc', ('dpse_26_1', (), ()), ('Anc', ('dper_27_1', (), ()), ('dper_27', (), ())))))), ('Anc', ('dana_24_1', (), ()), ('dana_24', (), ()))), ('Anc', ('Anc', ('Anc', ('dyak_15_1', (), ()), ('dyak_15', (), ())), ('Anc', ('dere_14', (), ()), ('dsec_11_1', (), ()))), ('Anc', ('dsec_11', (), ()), ('Anc', ('dsim_12_1', (), ()), ('dsim_12', (), ()))))), ('Anc', ('Anc', ('dvir_32_1', (), ()), ('dvir_32', (), ())), ('Anc', ('dgri_33', (), ()), ('dpse_26', (), ())))), ('Anc', ('dmel_9', (), ()), ('Anc', ('dmel_9_1', (), ()), ('dere_14_1', (), ())))), ('dyak_23_1', (), ())), ('Anc', ('Anc', ('dyak_23', (), ()), ('Anc', ('Anc', ('dere_22_1', (), ()), ('dere_22', (), ())), ('dsec_19', (), ()))), ('Anc', ('dsim_20_1', (), ()), ('Anc', ('dsec_19_1', (), ()), ('Anc', ('dsim_20', (), ()), ('Anc', ('dmel_17_1', (), ()), ('dmel_17', (), ())))))))
+
+Number of Feasible Neighbor Trees: 57
+Number of Infeasible Neighbor Trees: 2
+Found a New Feasible Tree!
+
+Loop Iteration: 5
+Loop Start Time: 00:15:20
+Current Tree
+Feasibility: True
+Score: 14170
+Tree:
+('Anc', ('Anc', ('dgri_33_1', (), ()), ('Anc', ('dmoj_31_1', (), ()), ('dmoj_31', (), ()))), ('Anc', ('Anc', ('Anc', ('dwil_28_1', (), ()), ('dwil_28', (), ())), ('Anc', ('dpse_26_1', (), ()), ('Anc', ('dper_27_1', (), ()), ('dper_27', (), ())))), ('Anc', ('Anc', ('dana_24_1', (), ()), ('dana_24', (), ())), ('Anc', ('Anc', ('Anc', ('Anc', ('dyak_15_1', (), ()), ('dyak_15', (), ())), ('Anc', ('dere_14', (), ()), ('dsec_11_1', (), ()))), ('Anc', ('dsec_11', (), ()), ('Anc', ('dsim_12_1', (), ()), ('dsim_12', (), ())))), ('Anc', ('Anc', ('Anc', ('dvir_32_1', (), ()), ('dvir_32', (), ())), ('Anc', ('dgri_33', (), ()), ('dpse_26', (), ()))), ('Anc', ('Anc', ('dmel_9', (), ()), ('Anc', ('dmel_9_1', (), ()), ('dere_14_1', (), ()))), ('Anc', ('dyak_23_1', (), ()), ('Anc', ('Anc', ('dyak_23', (), ()), ('Anc', ('Anc', ('dere_22_1', (), ()), ('dere_22', (), ())), ('dsec_19', (), ()))), ('Anc', ('dsim_20_1', (), ()), ('Anc', ('dsec_19_1', (), ()), ('Anc', ('dsim_20', (), ()), ('Anc', ('dmel_17_1', (), ()), ('dmel_17', (), ())))))))))))))
+
+Number of Feasible Neighbor Trees: 57
+Number of Infeasible Neighbor Trees: 2
+Found a New Feasible Tree!
+
+Loop Iteration: 6
+Loop Start Time: 00:30:27
+Current Tree
+Feasibility: True
+Score: 14165
+Tree:
+('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('dgri_33_1', (), ()), ('Anc', ('dmoj_31_1', (), ()), ('dmoj_31', (), ()))), ('Anc', ('Anc', ('dwil_28_1', (), ()), ('dwil_28', (), ())), ('Anc', ('dpse_26_1', (), ()), ('Anc', ('dper_27_1', (), ()), ('dper_27', (), ()))))), ('Anc', ('dana_24_1', (), ()), ('dana_24', (), ()))), ('Anc', ('Anc', ('Anc', ('dyak_15_1', (), ()), ('dyak_15', (), ())), ('Anc', ('dere_14', (), ()), ('dsec_11_1', (), ()))), ('Anc', ('dsec_11', (), ()), ('Anc', ('dsim_12_1', (), ()), ('dsim_12', (), ()))))), ('Anc', ('Anc', ('dmel_9', (), ()), ('Anc', ('dmel_9_1', (), ()), ('dere_14_1', (), ()))), ('Anc', ('dyak_23_1', (), ()), ('Anc', ('Anc', ('dyak_23', (), ()), ('Anc', ('Anc', ('dere_22_1', (), ()), ('dere_22', (), ())), ('dsec_19', (), ()))), ('Anc', ('dsim_20_1', (), ()), ('Anc', ('dsec_19_1', (), ()), ('Anc', ('dsim_20', (), ()), ('Anc', ('dmel_17_1', (), ()), ('dmel_17', (), ()))))))))), ('dvir_32_1', (), ())), ('Anc', ('Anc', ('dgri_33', (), ()), ('dpse_26', (), ())), ('dvir_32', (), ())))
+
+Number of Feasible Neighbor Trees: 57
+Number of Infeasible Neighbor Trees: 2
+Found a New Feasible Tree!
+
+Loop Iteration: 7
+Loop Start Time: 00:45:47
+Current Tree
+Feasibility: True
+Score: 14160
+Tree:
+('Anc', ('Anc', ('Anc', ('Anc', ('Anc', ('dgri_33_1', (), ()), ('Anc', ('dmoj_31_1', (), ()), ('dmoj_31', (), ()))), ('Anc', ('Anc', ('dwil_28_1', (), ()), ('dwil_28', (), ())), ('Anc', ('dpse_26_1', (), ()), ('Anc', ('dper_27_1', (), ()), ('dper_27', (), ()))))), ('Anc', ('dana_24_1', (), ()), ('dana_24', (), ()))), ('Anc', ('dvir_32_1', (), ()), ('Anc', ('Anc', ('dgri_33', (), ()), ('dpse_26', (), ())), ('dvir_32', (), ())))), ('Anc', ('Anc', ('Anc', ('dmel_9', (), ()), ('Anc', ('dmel_9_1', (), ()), ('dere_14_1', (), ()))), ('Anc', ('dyak_23_1', (), ()), ('Anc', ('Anc', ('dyak_23', (), ()), ('Anc', ('Anc', ('dere_22_1', (), ()), ('dere_22', (), ())), ('dsec_19', (), ()))), ('Anc', ('dsim_20_1', (), ()), ('Anc', ('dsec_19_1', (), ()), ('Anc', ('dsim_20', (), ()), ('Anc', ('dmel_17_1', (), ()), ('dmel_17', (), ())))))))), ('Anc', ('Anc', ('Anc', ('dyak_15_1', (), ()), ('dyak_15', (), ())), ('Anc', ('dere_14', (), ()), ('dsec_11_1', (), ()))), ('Anc', ('dsec_11', (), ()), ('Anc', ('dsim_12_1', (), ()), ('dsim_12', (), ()))))))
+
+Number of Feasible Neighbor Trees: 57
+Number of Infeasible Neighbor Trees: 2
+Found a New Feasible Tree!
+
+Loop Iteration: 8
+Loop Start Time: 01:01:14
+Current Tree
+Feasibility: True
+Score: 14157
+Tree:
+('Anc', ('Anc', ('dgri_33_1', (), ()), ('Anc', ('Anc', ('dana_24_1', (), ()), ('dana_24', (), ())), ('Anc', ('Anc', ('dvir_32_1', (), ()), ('Anc', ('Anc', ('dgri_33', (), ()), ('dpse_26', (), ())), ('dvir_32', (), ()))), ('Anc', ('Anc', ('Anc', ('dmel_9', (), ()), ('Anc', ('dmel_9_1', (), ()), ('dere_14_1', (), ()))), ('Anc', ('dyak_23_1', (), ()), ('Anc', ('Anc', ('dyak_23', (), ()), ('Anc', ('Anc', ('dere_22_1', (), ()), ('dere_22', (), ())), ('dsec_19', (), ()))), ('Anc', ('dsim_20_1', (), ()), ('Anc', ('dsec_19_1', (), ()), ('Anc', ('dsim_20', (), ()), ('Anc', ('dmel_17_1', (), ()), ('dmel_17', (), ())))))))), ('Anc', ('Anc', ('Anc', ('dyak_15_1', (), ()), ('dyak_15', (), ())), ('Anc', ('dere_14', (), ()), ('dsec_11_1', (), ()))), ('Anc', ('dsec_11', (), ()), ('Anc', ('dsim_12_1', (), ()), ('dsim_12', (), ())))))))), ('Anc', ('Anc', ('Anc', ('dwil_28_1', (), ()), ('dwil_28', (), ())), ('Anc', ('dpse_26_1', (), ()), ('Anc', ('dper_27_1', (), ()), ('dper_27', (), ())))), ('Anc', ('dmoj_31_1', (), ()), ('dmoj_31', (), ()))))
+
+Number of Feasible Neighbor Trees: 57
+Number of Infeasible Neighbor Trees: 2
+Found a New Feasible Tree!
+
+Loop Iteration: 9
+Loop Start Time: 01:16:54
+Current Tree
+Feasibility: True
+Score: 14156
+Tree:
+('Anc', ('Anc', ('Anc', ('dgri_33_1', (), ()), ('Anc', ('Anc', ('dana_24_1', (), ()), ('dana_24', (), ())), ('Anc', ('Anc', ('dvir_32_1', (), ()), ('Anc', ('Anc', ('dgri_33', (), ()), ('dpse_26', (), ())), ('dvir_32', (), ()))), ('Anc', ('Anc', ('Anc', ('dmel_9', (), ()), ('Anc', ('dmel_9_1', (), ()), ('dere_14_1', (), ()))), ('Anc', ('dyak_23_1', (), ()), ('Anc', ('Anc', ('dyak_23', (), ()), ('Anc', ('Anc', ('dere_22_1', (), ()), ('dere_22', (), ())), ('dsec_19', (), ()))), ('Anc', ('dsim_20_1', (), ()), ('Anc', ('dsec_19_1', (), ()), ('Anc', ('dsim_20', (), ()), ('Anc', ('dmel_17_1', (), ()), ('dmel_17', (), ())))))))), ('Anc', ('Anc', ('Anc', ('dyak_15_1', (), ()), ('dyak_15', (), ())), ('Anc', ('dere_14', (), ()), ('dsec_11_1', (), ()))), ('Anc', ('dsec_11', (), ()), ('Anc', ('dsim_12_1', (), ()), ('dsim_12', (), ())))))))), ('Anc', ('dwil_28_1', (), ()), ('dwil_28', (), ()))), ('Anc', ('Anc', ('dmoj_31_1', (), ()), ('dmoj_31', (), ())), ('Anc', ('dpse_26_1', (), ()), ('Anc', ('dper_27_1', (), ()), ('dper_27', (), ())))))
+
+Number of Feasible Neighbor Trees: 57
+Number of Infeasible Neighbor Trees: 2
+Best Possible Feasible Tree Found
+('Anc', ('Anc', ('Anc', ('dmel_9', (), ()), ('Anc', ('dmel_9_1', (), ()), ('dere_14_1', (), ()))), ('Anc', ('Anc', ('Anc', ('dyak_15_1', (), ()), ('dyak_15', (), ())), ('Anc', ('dere_14', (), ()), ('dsec_11_1', (), ()))), ('Anc', ('dsec_11', (), ()), ('Anc', ('dsim_12_1', (), ()), ('dsim_12', (), ()))))), ('Anc', ('Anc', ('dyak_23_1', (), ()), ('Anc', ('Anc', ('dyak_23', (), ()), ('Anc', ('Anc', ('dere_22_1', (), ()), ('dere_22', (), ())), ('dsec_19', (), ()))), ('Anc', ('dsim_20_1', (), ()), ('Anc', ('dsec_19_1', (), ()), ('Anc', ('dsim_20', (), ()), ('Anc', ('dmel_17_1', (), ()), ('dmel_17', (), ()))))))), ('Anc', ('Anc', ('dvir_32_1', (), ()), ('Anc', ('Anc', ('dgri_33', (), ()), ('dpse_26', (), ())), ('dvir_32', (), ()))), ('Anc', ('Anc', ('dana_24_1', (), ()), ('dana_24', (), ())), ('Anc', ('dgri_33_1', (), ()), ('Anc', ('Anc', ('dwil_28_1', (), ()), ('dwil_28', (), ())), ('Anc', ('Anc', ('dmoj_31_1', (), ()), ('dmoj_31', (), ())), ('Anc', ('dpse_26_1', (), ()), ('Anc', ('dper_27_1', (), ()), ('dper_27', (), ()))))))))))
+Score: 14156
+
+Program End: 7492.168851 seconds
+
