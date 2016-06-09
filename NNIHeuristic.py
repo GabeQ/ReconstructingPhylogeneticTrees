@@ -58,7 +58,7 @@ def bestSinglePosition(tree, character, position, tipMapping, memo):
             return ans
 '''           
 def maxParsimony(tree, tipMapping):
-    """computes the best score for all positions in a sequence and for all possible characters"""
+    """computes the best score for all positions in a sequence and for all possible characters - threaded version"""
     keys = tipMapping.keys()
     length = len(tipMapping[keys[0]])
     ans = 0
@@ -95,7 +95,7 @@ def maxParsimony(tree, tipMapping):
     return ans
 
 def RLRtoNewick(tree):
-    """converts from Root,Left,Right format trees to Newick format trees """
+    """converts from Root,Left,Right (RLR) format trees to Newick format trees """
     if isLeaf(tree) == True:
         return tree[0]
     else:
@@ -117,7 +117,7 @@ def goLeft(tree):
     LL = tree[0][0]
     LR = tree[0][1]
     R = tree[1]
-    if type(LL) != tuple and type(LR) != tuple:
+    if type(LL) != tuple and type(LR) != tuple: #tuples indicate that we havent hit a leaf yet in Newick Format
         return []
     elif type(LL) != tuple:
         return [(LR, (LL, R))] + goLeft((LR, (LL, R)))
@@ -170,6 +170,8 @@ def makeTree(tips):
         return ("Anc", (tips[0], (), ()), makeTree(tips[1:]))
 
 def getGeneGroups(leaves):
+    '''takes a list of the leaves (consisting of genes with locus numbers and individual numbers) and 
+    creates a list of lists grouping same genes together with different loci'''
     leaves = sorted(leaves)
     groups = []
     while leaves != []:
@@ -185,7 +187,10 @@ def getGeneGroups(leaves):
         groups.append(group)
     return groups       
                                        
-def isFeasible(graph, leaves): #checks if the tree is possible
+def isFeasible(graph, leaves): 
+    '''checks if the tree is possible by taking a graph (of the tree using makeGraph) and constructing a graph connecting 
+    genes that have overlapping paths within the tree; if there is a gene that has multiple loci connected within this 
+    graph (meaning at least two loci from the same gene can be reached within the graph), the tree is considered infeasible'''
     geneGroups = getGeneGroups(leaves)
     groupPaths = []
     intersectGraph = nx.Graph()
@@ -211,7 +216,8 @@ def isFeasible(graph, leaves): #checks if the tree is possible
                     return False
     return True
                   
-def makeGraph(graph, tree): #takes RLR tree
+def makeGraph(graph, tree): 
+    '''takes RLR tree and recursively constructs a networkx graph'''
     if isLeaf(tree):
         return tree[0]
     else:
@@ -220,13 +226,15 @@ def makeGraph(graph, tree): #takes RLR tree
         graph.add_edge(uniqueId, makeGraph(graph, tree[2]))
         return uniqueId
         
-def getLeaves(tree): #takes RLR tree
+def getLeaves(tree): 
+    '''takes RLR tree and gets a list of leaves'''
     if isLeaf(tree):
         return [tree[0]]
     else:
         return getLeaves(tree[1]) + getLeaves(tree[2])
         
 def getEdges(tree):
+    '''takes a RLR tree and gets the edges of the tree'''
     if isLeaf(tree):
         return []
     elif isLeaf(tree[1]) and isLeaf(tree[2]):
@@ -234,7 +242,10 @@ def getEdges(tree):
     else: return [(tree[0], tree[1][0]), (tree[0], tree[2][0])] + getEdges(tree[1]) + getEdges(tree[2])
 
 def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
-    """"Find the maximum parsimony score for that tree"""
+    """"takes a FASTAFile, constructs a UPGMA Tree from the file data, converts this tree to RLR format,
+    tests if the tree is feasible and scores it using maxParsimony, and then goes into a while loop constructing
+    NNIs, tests to see if the trees are feasible or infeasible; tries to find the tree with the lowest parsimony
+    score that is also feasible"""
     random.seed(0)
     outputFile = FASTAFile.replace(".align", ".out")
     if "/" in outputFile:
@@ -275,6 +286,8 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
     # RLR tree required for maxParsimony function
     tree = NewicktoRLR(tree)
     score = maxParsimony(tree, tipMapping)
+    
+    #Graph required for feasibility check
     graph = nx.Graph()
     makeGraph(graph, tree)
     leaves = getLeaves(tree)
@@ -307,7 +320,6 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
                 
         output.write("Number of Feasible Neighbor Trees: " + str(len(feasible)) + "\n")
         output.write("Number of Infeasible Neighbor Trees: " + str(len(infeasible)) + "\n")
-        
         if len(feasible) != 0: #if feasible NNIs were found
             scoredList = map(lambda x: (maxParsimony(x, tipMapping), x), feasible)
             sortedList = sorted(scoredList)
@@ -352,7 +364,6 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
     #outputTree = RLRtoNewick(tree)
     #print "Final score", score
     return
-    
 
 	
 testList1 = ["a_1", "a_1_1", "a_2", "a_2_1", "b_1", "b_1_1"]
