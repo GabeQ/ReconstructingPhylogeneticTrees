@@ -305,7 +305,7 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
         if len(NNIs)-1 < sampleSize:
             sampleSize = len(NNIs)-1
         toScore = random.sample(NNIs, sampleSize)
-        
+
         # add feasibility test
         feasible = []
         infeasible = []
@@ -317,7 +317,7 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
                 feasible.append(tree)
             else:
                 infeasible.append(tree) #if this tree is not possible
-                
+
         output.write("Number of Feasible Neighbor Trees: " + str(len(feasible)) + "\n")
         output.write("Number of Infeasible Neighbor Trees: " + str(len(infeasible)) + "\n")
         if len(feasible) != 0: #if feasible NNIs were found
@@ -360,12 +360,43 @@ def NNIHeuristic(FASTAFile, sampleSize, threshold, outputDir):
             output.write("Next Best Infeasible Tree\n\n")
     endTime = (time.clock() - startTime)
     output.write("Program End: " + str(endTime) + " seconds\n\n")
-                
+
     #outputTree = RLRtoNewick(tree)
     #print "Final score", score
     return
     
-	
+def buildTree(FASTAFile):
+    myAlignment = AlignIO.read(FASTAFile, "fasta")
+    
+    # Create a tip mapping from the fasta file
+    tipMapping = {}
+    for record in myAlignment:
+        tipMapping[record.id] = str(record.seq)
+        
+    # Compute a distance matrix and construct tree
+    calculator = DistanceCalculator("identity") 
+    myMatrix = calculator.get_distance(myAlignment)
+    constructor = DistanceTreeConstructor()
+    upgmaTree = constructor.nj(myMatrix)
+    upgmaTree.root_at_midpoint()
+    Phylo.draw(upgmaTree)
+    # Convert phyloxml tree to newick
+    # biopython does not provide a function to do this so it was necessary
+    # to write to a buffer in newick to convert then get rid of unneeded info
+    for clade in upgmaTree.get_terminals():
+        clade.name = "\"" + clade.name + "\""
+    buf = cStringIO.StringIO()
+    Phylo.write(upgmaTree, buf, 'newick', plain = True)
+    tree = buf.getvalue()
+    tree = re.sub(r'Inner\d*', '', tree)
+    tree = tree.replace(";", "")
+    tree = literal_eval(tree)    #newick format
+
+    # RLR tree required for maxParsimony function
+    tree = NewicktoRLR(tree)
+    return tree
+
+
 testList1 = ["a_1", "a_1_1", "a_2", "a_2_1", "b_1", "b_1_1"]
 testList2 = ["a_1", "a_1_1", "b_2", "b_2_1", "b_1", "b_1_1"]
-testTree = (1, ("a", (), ()), (2, ("b_1", (), ()), ("b_2", (), ())))
+testTree = (1, (2, (3, ("a_1", (), ()), ("a_1_1", (), ())), (4, ("a_2", (), ()), ("a_2_1", (), ()))), (5, ("b_1", (), ()), ("b_1_1", (), ())))
