@@ -210,7 +210,7 @@ def isFeasible(graph, leaves):
         for j in range(i+1, len(geneGroups)):
             geneLocus1 = geneGroups[i][0]
             geneLocus2 = geneGroups[j][0]
-            if geneLocus1[:groupPaths[i][0].find('_')] == geneLocus2[:groupPaths[i][0].find('_')]:
+            if geneLocus1[:geneLocus1.find('_')] == geneLocus2[:geneLocus2.find('_')]:
                 if intersectGraph.has_node(geneLocus1) and intersectGraph.has_node(geneLocus2) \
                    and nx.has_path(intersectGraph, geneLocus1, geneLocus2):
                     return False

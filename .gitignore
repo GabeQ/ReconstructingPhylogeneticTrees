@@ -46,3 +46,4 @@ _ReSharper*/
 nohup.out
 *.pyc
 .idea/
+plct/
